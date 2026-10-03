@@ -1,0 +1,470 @@
+[
+ {
+  "entity_id": "light.reception",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Reception Lights"
+  }
+ },
+ {
+  "entity_id": "sensor.reception_lights_power",
+  "state": "38",
+  "attributes": {
+   "friendly_name": "Reception Lights Power",
+   "device_class": "power",
+   "state_class": "measurement",
+   "unit_of_measurement": "W"
+  }
+ },
+ {
+  "entity_id": "sensor.reception_lights_energy",
+  "state": "64.6",
+  "attributes": {
+   "friendly_name": "Reception Lights Energy",
+   "device_class": "energy",
+   "state_class": "total_increasing",
+   "unit_of_measurement": "kWh"
+  }
+ },
+ {
+  "entity_id": "light.meeting_room",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Meeting Room Lights"
+  }
+ },
+ {
+  "entity_id": "sensor.meeting_room_lights_power",
+  "state": "120",
+  "attributes": {
+   "friendly_name": "Meeting Room Lights Power",
+   "device_class": "power",
+   "state_class": "measurement",
+   "unit_of_measurement": "W"
+  }
+ },
+ {
+  "entity_id": "sensor.meeting_room_lights_energy",
+  "state": "204.0",
+  "attributes": {
+   "friendly_name": "Meeting Room Lights Energy",
+   "device_class": "energy",
+   "state_class": "total_increasing",
+   "unit_of_measurement": "kWh"
+  }
+ },
+ {
+  "entity_id": "light.open_space",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Open Space Lights"
+  }
+ },
+ {
+  "entity_id": "sensor.open_space_lights_power",
+  "state": "260",
+  "attributes": {
+   "friendly_name": "Open Space Lights Power",
+   "device_class": "power",
+   "state_class": "measurement",
+   "unit_of_measurement": "W"
+  }
+ },
+ {
+  "entity_id": "sensor.open_space_lights_energy",
+  "state": "442.0",
+  "attributes": {
+   "friendly_name": "Open Space Lights Energy",
+   "device_class": "energy",
+   "state_class": "total_increasing",
+   "unit_of_measurement": "kWh"
+  }
+ },
+ {
+  "entity_id": "light.server_room",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Server Room Lights"
+  }
+ },
+ {
+  "entity_id": "sensor.server_room_lights_power",
+  "state": "410",
+  "attributes": {
+   "friendly_name": "Server Room Lights Power",
+   "device_class": "power",
+   "state_class": "measurement",
+   "unit_of_measurement": "W"
+  }
+ },
+ {
+  "entity_id": "sensor.server_room_lights_energy",
+  "state": "697.0",
+  "attributes": {
+   "friendly_name": "Server Room Lights Energy",
+   "device_class": "energy",
+   "state_class": "total_increasing",
+   "unit_of_measurement": "kWh"
+  }
+ },
+ {
+  "entity_id": "light.kitchen",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Kitchen Lights"
+  }
+ },
+ {
+  "entity_id": "sensor.kitchen_lights_power",
+  "state": "55",
+  "attributes": {
+   "friendly_name": "Kitchen Lights Power",
+   "device_class": "power",
+   "state_class": "measurement",
+   "unit_of_measurement": "W"
+  }
+ },
+ {
+  "entity_id": "sensor.kitchen_lights_energy",
+  "state": "93.5",
+  "attributes": {
+   "friendly_name": "Kitchen Lights Energy",
+   "device_class": "energy",
+   "state_class": "total_increasing",
+   "unit_of_measurement": "kWh"
+  }
+ },
+ {
+  "entity_id": "climate.open_space_ac",
+  "state": "cool",
+  "attributes": {
+   "friendly_name": "Open Space AC",
+   "current_temperature": 23,
+   "temperature": 22
+  }
+ },
+ {
+  "entity_id": "sensor.open_space_ac_power",
+  "state": "1650",
+  "attributes": {
+   "friendly_name": "Open Space AC Power",
+   "device_class": "power",
+   "state_class": "measurement",
+   "unit_of_measurement": "W"
+  }
+ },
+ {
+  "entity_id": "sensor.open_space_ac_energy",
+  "state": "10.23",
+  "attributes": {
+   "friendly_name": "Open Space AC Energy",
+   "device_class": "energy",
+   "state_class": "total_increasing",
+   "unit_of_measurement": "kWh"
+  }
+ },
+ {
+  "entity_id": "climate.meeting_room_ac",
+  "state": "cool",
+  "attributes": {
+   "friendly_name": "Meeting Room AC",
+   "current_temperature": 23,
+   "temperature": 22
+  }
+ },
+ {
+  "entity_id": "sensor.meeting_room_ac_power",
+  "state": "900",
+  "attributes": {
+   "friendly_name": "Meeting Room AC Power",
+   "device_class": "power",
+   "state_class": "measurement",
+   "unit_of_measurement": "W"
+  }
+ },
+ {
+  "entity_id": "sensor.meeting_room_ac_energy",
+  "state": "5.58",
+  "attributes": {
+   "friendly_name": "Meeting Room AC Energy",
+   "device_class": "energy",
+   "state_class": "total_increasing",
+   "unit_of_measurement": "kWh"
+  }
+ },
+ {
+  "entity_id": "sensor.coffee_machine_power",
+  "state": "1200",
+  "attributes": {
+   "friendly_name": "Coffee Machine Power",
+   "device_class": "power",
+   "state_class": "measurement",
+   "unit_of_measurement": "W"
+  }
+ },
+ {
+  "entity_id": "sensor.printer_energy",
+  "state": "12.4",
+  "attributes": {
+   "friendly_name": "Printer Energy",
+   "device_class": "energy",
+   "state_class": "measurement",
+   "unit_of_measurement": "kWh"
+  }
+ },
+ {
+  "entity_id": "sensor.grid_power",
+  "state": "5200",
+  "attributes": {
+   "friendly_name": "Grid Power",
+   "device_class": "power",
+   "state_class": "measurement",
+   "unit_of_measurement": "W"
+  }
+ },
+ {
+  "entity_id": "sensor.grid_energy_import",
+  "state": "812.5",
+  "attributes": {
+   "friendly_name": "Grid Energy Import",
+   "device_class": "energy",
+   "state_class": "total_increasing",
+   "unit_of_measurement": "kWh"
+  }
+ },
+ {
+  "entity_id": "sensor.energy_cost_today",
+  "state": "31.2",
+  "attributes": {
+   "friendly_name": "Energy Cost Today",
+   "device_class": "monetary",
+   "unit_of_measurement": "USD"
+  }
+ },
+ {
+  "entity_id": "camera.reception_cam",
+  "state": "idle",
+  "attributes": {
+   "friendly_name": "Reception Cam"
+  }
+ },
+ {
+  "entity_id": "camera.parking_cam",
+  "state": "idle",
+  "attributes": {
+   "friendly_name": "Parking Cam"
+  }
+ },
+ {
+  "entity_id": "camera.server_room_cam",
+  "state": "idle",
+  "attributes": {
+   "friendly_name": "Server Room Cam"
+  }
+ },
+ {
+  "entity_id": "camera.entrance_cam",
+  "state": "idle",
+  "attributes": {
+   "friendly_name": "Entrance Cam"
+  }
+ },
+ {
+  "entity_id": "binary_sensor.entrance_motion",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Entrance Motion",
+   "device_class": "motion"
+  }
+ },
+ {
+  "entity_id": "binary_sensor.server_room_door",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Server Room Door",
+   "device_class": "door"
+  }
+ },
+ {
+  "entity_id": "lock.main_door",
+  "state": "locked",
+  "attributes": {
+   "friendly_name": "Main Door"
+  }
+ },
+ {
+  "entity_id": "alarm_control_panel.office",
+  "state": "armed_away",
+  "attributes": {
+   "friendly_name": "Office Alarm"
+  }
+ },
+ {
+  "entity_id": "cover.shutters",
+  "state": "open",
+  "attributes": {
+   "friendly_name": "Shutters"
+  }
+ },
+ {
+  "entity_id": "assist_satellite.reception",
+  "state": "idle",
+  "attributes": {
+   "friendly_name": "Reception Satellite"
+  }
+ },
+ {
+  "entity_id": "conversation.home_assistant",
+  "state": "unknown",
+  "attributes": {
+   "friendly_name": "Home Assistant"
+  }
+ },
+ {
+  "entity_id": "media_player.reception_speaker",
+  "state": "idle",
+  "attributes": {
+   "friendly_name": "Reception Speaker"
+  }
+ },
+ {
+  "entity_id": "sensor.pve_node_cpu_usage",
+  "state": "23",
+  "attributes": {
+   "friendly_name": "Pve Node Cpu Usage",
+   "unit_of_measurement": "%"
+  }
+ },
+ {
+  "entity_id": "sensor.pve_node_memory_usage",
+  "state": "61",
+  "attributes": {
+   "friendly_name": "Pve Node Memory Usage",
+   "unit_of_measurement": "%"
+  }
+ },
+ {
+  "entity_id": "sensor.pve_vm_dokploy_status",
+  "state": "running",
+  "attributes": {
+   "friendly_name": "Pve Vm Dokploy Status"
+  }
+ },
+ {
+  "entity_id": "sensor.pve_storage_local_zfs_usage",
+  "state": "74",
+  "attributes": {
+   "friendly_name": "Pve Storage Local Zfs Usage",
+   "unit_of_measurement": "%"
+  }
+ },
+ {
+  "entity_id": "binary_sensor.uptime_kuma_example_com",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "example.com",
+   "device_class": "connectivity"
+  }
+ },
+ {
+  "entity_id": "binary_sensor.uptime_kuma_example_org",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "example.org",
+   "device_class": "connectivity"
+  }
+ },
+ {
+  "entity_id": "sensor.cert_expiry_timestamp_example_com",
+  "state": "2026-11-30T00:00:00+00:00",
+  "attributes": {
+   "friendly_name": "example.com Cert Expiry",
+   "device_class": "timestamp"
+  }
+ },
+ {
+  "entity_id": "sensor.cert_expiry_timestamp_example_org",
+  "state": "2026-10-24T00:00:00+00:00",
+  "attributes": {
+   "friendly_name": "example.org Cert Expiry",
+   "device_class": "timestamp"
+  }
+ },
+ {
+  "entity_id": "sensor.dokploy_apps_running",
+  "state": "7",
+  "attributes": {
+   "friendly_name": "Dokploy Apps Running"
+  }
+ },
+ {
+  "entity_id": "sensor.backup_last_successful",
+  "state": "2026-10-02T03:00:12+00:00",
+  "attributes": {
+   "friendly_name": "Last Successful Backup",
+   "device_class": "timestamp"
+  }
+ },
+ {
+  "entity_id": "sensor.backup_state",
+  "state": "completed",
+  "attributes": {
+   "friendly_name": "Backup State"
+  }
+ },
+ {
+  "entity_id": "sensor.gdrive_backup_usage",
+  "state": "68",
+  "attributes": {
+   "friendly_name": "Google Drive Backup Usage",
+   "unit_of_measurement": "%"
+  }
+ },
+ {
+  "entity_id": "weather.dubai",
+  "state": "sunny",
+  "attributes": {
+   "friendly_name": "Home"
+  }
+ },
+ {
+  "entity_id": "sensor.office_temperature",
+  "state": "24.1",
+  "attributes": {
+   "friendly_name": "Office Temperature",
+   "device_class": "temperature",
+   "state_class": "measurement",
+   "unit_of_measurement": "\u00b0C"
+  }
+ },
+ {
+  "entity_id": "sensor.office_humidity",
+  "state": "47",
+  "attributes": {
+   "friendly_name": "Office Humidity",
+   "device_class": "humidity",
+   "state_class": "measurement",
+   "unit_of_measurement": "%"
+  }
+ },
+ {
+  "entity_id": "sensor.old_zigbee_plug_power",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Old Zigbee Plug Power",
+   "device_class": "power",
+   "state_class": "measurement",
+   "unit_of_measurement": "W"
+  }
+ },
+ {
+  "entity_id": "sensor.server_room_temperature",
+  "state": "27.4",
+  "attributes": {
+   "friendly_name": "Server Room Temperature",
+   "device_class": "temperature",
+   "state_class": "measurement",
+   "unit_of_measurement": "\u00b0C"
+  }
+ }
+]

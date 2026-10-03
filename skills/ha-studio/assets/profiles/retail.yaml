@@ -1,0 +1,17 @@
+# Business profile: Retail / Showroom
+id: retail
+name: Retail / Showroom
+description: "Shop floor: lighting and AC load, door counter, cameras, POS uptime."
+tabs: [overview, energy, security, infra, backups, voice]
+tariff: {currency: USD, per_kwh: 0.15}   # example only; set your own
+# KPIs shown as tiles on Overview. entity_match is a regex on entity_id; category narrows the search.
+# A KPI whose entity is not found is reported as a gap instead of inventing an entity.
+kpis:
+  - {label: Power now,       category: power,    entity_match: "grid|mains|total", icon: "mdi:flash",            ui: gauge, max: 10000, unit: W}
+  - {label: Energy today,    category: energy,   entity_match: "grid|total",      icon: "mdi:lightning-bolt",   ui: tile}
+  - {label: Cost today,      category: cost,     entity_match: "cost|bill",       icon: "mdi:cash",             ui: tile}
+  - {label: Indoor temp,     category: sensor,   entity_match: "temperature",     icon: "mdi:thermometer",      ui: tile}
+  - {label: Door state,       category: security, entity_match: "door|entrance",     icon: "mdi:door",             ui: tile}
+  - {label: Alarm,           category: alarm,    entity_match: ".",               icon: "mdi:shield-home",      ui: tile}
+  - {label: Uptime (sites),  category: infra,    entity_match: "uptime|kuma",     icon: "mdi:web-check",        ui: tile}
+  - {label: Last backup,     category: backup,   entity_match: "last_success|last_successful", icon: "mdi:backup-restore", ui: tile}

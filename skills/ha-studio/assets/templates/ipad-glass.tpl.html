@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>@@BRAND@@ HA iPad · @@NAME@@</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+@@FONTS_LINK@@
+<style>
+body{margin:0;background:@@BASE@@}
+button{font-family:inherit;color:inherit;-webkit-tap-highlight-color:transparent;transition:transform .12s ease-out,background-color .2s,border-color .2s}
+button:active{transform:scale(.97)}
+button:focus-visible{outline:2px solid #62c4e1;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){button{transition:none}}
+@media (prefers-reduced-transparency:reduce){[style*="backdrop-filter"]{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:var(--solid)!important}}
+@media (prefers-contrast:more){[style*="backdrop-filter"]{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:var(--solid)!important;border-color:var(--t)!important}}
+@media (forced-colors:active){[style*="backdrop-filter"]{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:Canvas!important;border-color:CanvasText!important}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){[style*="backdrop-filter"]{background:var(--solid)!important}}
+</style>
+</helmet>
+<div style="@@VARS@@ width: 1194px; height: 834px; box-sizing: border-box; display: flex; background: @@BG@@; color: var(--t); font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; overflow: hidden">
+
+<!-- === RAIL === -->
+<nav aria-label="Sections" style="width: 64px; flex-shrink: 0; box-sizing: border-box; background: var(--card); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); border-right: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; padding: 10px 0; gap: 8px">
+<sc-for list="{{rail}}" as="r" hint-placeholder-count="5">
+<button onClick="{{ r.go }}" aria-label="{{ r.label }}" aria-current="{{ r.current }}" style="width: 48px; height: 48px; border: 0; border-radius: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; {{ r.style }}">@@RAIL_ICONS@@</button>
+</sc-for>
+<div style="flex-grow: 1"></div>
+<div aria-hidden="true" style="width: 48px; height: 48px; border-radius: 14px; color: var(--m); display: flex; align-items: center; justify-content: center">@@GEAR@@</div>
+</nav>
+
+<div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column">
+
+<!-- === HEADER === -->
+<header style="height: 60px; flex-shrink: 0; box-sizing: border-box; background: var(--card); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); border-bottom: 1px solid var(--border); display: flex; align-items: stretch; padding: 0 16px 0 20px; gap: 24px">
+<div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0">
+<span style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 20px; letter-spacing: -0.01em">@@BRAND@@<span style="color: var(--acct)">.</span></span>
+<span style="font-size: 14px; color: var(--m)">@@SUBTITLE@@</span>
+</div>
+<nav aria-label="Views" style="display: flex; align-items: stretch; flex-grow: 1; min-width: 0">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+<button onClick="{{ t.go }}" aria-current="{{ t.current }}" style="min-width: 88px; padding: 0 16px; border: 0; border-bottom: 3px solid transparent; background: transparent; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; {{ t.extra }}">{{ t.label }}</button>
+</sc-for>
+</nav>
+<div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0">
+<span style="padding: 4px 10px; border-radius: 9999px; background: var(--chip); font-size: 12px; font-weight: 600; color: var(--ink2)">Sample data</span>
+<div style="width: 36px; height: 36px; border-radius: 9999px; background: var(--chip); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600">@@INITIALS@@</div>
+</div>
+</header>
+
+<!-- === CONTENT === -->
+<main style="flex: 1 1 0; min-height: 0; box-sizing: border-box; padding: 20px 24px; overflow-y: auto; scrollbar-width: none">
+
+<!-- ========== OVERVIEW ========== -->
+<sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+
+<div style="display: flex; align-items: center; gap: 24px">
+<div style="width: 300px; flex-shrink: 0"><h1 style="@@H1@@">Good morning, @@USER@@</h1><div style="@@MUTED@@ margin-top: 2px">@@SITE@@</div></div>
+<div style="flex: 1 1 0; min-width: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
+<button onClick="{{ k.go }}" style="@@CARD@@ @@BTN@@ height: 64px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 0 12px">
+<span style="width: 36px; height: 36px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; {{ k.iconStyle }}">@@KPI_ICONS@@</span>
+<span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 15px; font-weight: 600; line-height: 20px; @@NOWRAP@@">{{ k.value }}</span><span style="@@MUTED@@ @@NOWRAP@@">{{ k.label }}</span></span>
+</button>
+</sc-for>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch">
+
+<!-- col 1 -->
+<section aria-label="Lights and security" style="display: flex; flex-direction: column; gap: 8px; min-width: 0">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="@@H2@@">Office lights</h2><span style="@@MUTED@@">{{ lightsW }} W now</span></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, 72px); gap: 8px">
+<sc-for list="{{lights}}" as="l" hint-placeholder-count="4">
+<button onClick="{{ l.toggle }}" aria-pressed="{{ l.on }}" style="@@CARD@@ @@BTN@@ box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 0 10px; min-width: 0">
+<span style="@@CIRCLE@@ {{ l.iconStyle }}">@@BULB@@</span>
+<span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 14px; font-weight: 500; line-height: 20px; @@NOWRAP@@">{{ l.name }}</span><span style="@@MUTED@@ @@NOWRAP@@">{{ l.state }}</span></span>
+</button>
+</sc-for>
+</div>
+<h2 style="@@H2@@ margin-top: 8px">Security &amp; access</h2>
+<div style="flex: 1 1 0; min-height: 144px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(72px, 1fr)); gap: 8px">
+<button onClick="{{ toggleLock }}" aria-pressed="{{ locked }}" style="@@CARD@@ @@BTN@@ box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 0 10px; min-width: 0">
+<span style="@@CIRCLE@@ {{ lockIconStyle }}"><sc-if value="{{ locked }}" hint-placeholder-val="{{ true }}">@@LOCK@@</sc-if><sc-if value="{{ unlocked }}" hint-placeholder-val="{{ false }}">@@UNLOCK@@</sc-if></span>
+<span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 14px; font-weight: 500; line-height: 20px; @@NOWRAP@@">Front door</span><span style="@@MUTED@@">{{ lockText }}</span></span>
+</button>
+<div style="@@CARD@@ box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 0 10px; min-width: 0">
+<span style="@@CIRCLE@@ background: var(--chip); color: var(--m)">@@DOOR@@</span>
+<span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 14px; font-weight: 500; line-height: 20px; @@NOWRAP@@">Server room</span><span style="@@MUTED@@">Door closed</span></span>
+</div>
+<div style="@@CARD@@ box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 0 10px; min-width: 0">
+<span style="@@CIRCLE@@ background: var(--chip); color: var(--m)">@@CAM@@</span>
+<span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 14px; font-weight: 500; line-height: 20px; @@NOWRAP@@">Lobby cam</span><span style="@@MUTED@@">No person</span></span>
+</div>
+<div style="@@CARD@@ box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 0 10px; min-width: 0">
+<span style="@@CIRCLE@@ background: var(--chip); color: var(--m)">@@THERM@@</span>
+<span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 14px; font-weight: 500; line-height: 20px; @@NOWRAP@@">Rack room</span><span style="@@MUTED@@">24.1 °C</span></span>
+</div>
+</div>
+</section>
+
+<!-- col 2 -->
+<section aria-label="Climate" style="display: flex; flex-direction: column; gap: 8px; min-width: 0">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="@@H2@@">Climate</h2><span style="@@MUTED@@">{{ climateText }}</span></div>
+<div style="@@CARD@@ flex: 1 1 0; box-sizing: border-box; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px">
+<div style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500">@@SNOW16@@<span>Office AC</span></div>
+<div style="display: flex; align-items: center; justify-content: center; gap: 10px">
+<button onClick="{{ tempDown }}" aria-label="Lower target temperature" style="@@ROUND@@ width: 48px; height: 48px">@@MINUS@@</button>
+<div style="position: relative; width: 190px; height: 168px; flex-shrink: 0">
+<svg viewBox="0 0 200 170" width="190" height="162" aria-hidden="true" style="position: absolute; top: 0; left: 0">
+<circle cx="100" cy="100" r="80" fill="none" stroke="var(--line)" stroke-width="12" stroke-linecap="round" pathLength="100" transform="rotate(135 100 100)" style="stroke-dasharray: 75 100"></circle>
+<circle cx="100" cy="100" r="80" fill="none" stroke-width="12" stroke-linecap="round" pathLength="100" transform="rotate(135 100 100)" style="{{ arcStyle }}"></circle>
+</svg>
+<div style="position: absolute; top: 62px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center">
+<span style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 42px; line-height: 46px">{{ targetText }}</span>
+<span style="@@MUTED@@">Now 23.5 °C · 48 %</span>
+</div>
+</div>
+<button onClick="{{ tempUp }}" aria-label="Raise target temperature" style="@@ROUND@@ width: 48px; height: 48px">@@PLUS@@</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{modes}}" as="m" hint-placeholder-count="3">
+<button onClick="{{ m.pick }}" aria-pressed="{{ m.active }}" style="height: 44px; border: 0; border-radius: 9999px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; {{ m.style }}">@@MODE_ICONS@@<span>{{ m.label }}</span></button>
+</sc-for>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--border)"><span style="@@MUTED@@">Power draw now</span><span style="font-size: 15px; font-weight: 600">{{ acW }} W</span></div>
+</div>
+</section>
+
+<!-- col 3 -->
+<section aria-label="Speaker and scenes" style="display: flex; flex-direction: column; gap: 8px; min-width: 0">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="@@H2@@">Office speaker</h2><span style="@@MUTED@@">{{ speakerState }}</span></div>
+<div style="@@CARD@@ border-color: var(--acc); box-sizing: border-box; padding: 14px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 12px">
+<div style="width: 52px; height: 52px; border-radius: 14px; background: var(--chip); display: flex; align-items: center; justify-content: center; flex-shrink: 0">@@VOL26@@</div>
+<div style="display: flex; flex-direction: column; min-width: 0; flex-grow: 1"><span style="@@MUTED@@">Smart speaker</span><span style="font-size: 14px; font-weight: 500; @@NOWRAP@@">{{ nowPlaying }}</span></div>
+<button onClick="{{ togglePlay }}" aria-label="{{ playLabel }}" style="width: 48px; height: 48px; border: 0; border-radius: 9999px; background: var(--acc); color: var(--ona); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><sc-if value="{{ playing }}" hint-placeholder-val="{{ true }}">@@PAUSE@@</sc-if><sc-if value="{{ paused }}" hint-placeholder-val="{{ false }}">@@PLAY@@</sc-if></button>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<button onClick="{{ volDown }}" aria-label="Volume down" style="@@ROUND@@ width: 44px; height: 44px">@@MINUS16@@</button>
+<div style="flex-grow: 1; height: 8px; border-radius: 9999px; background: var(--line)"><div style="height: 8px; border-radius: 9999px; background: var(--ink2); width: {{ volume }}%"></div></div>
+<button onClick="{{ volUp }}" aria-label="Volume up" style="@@ROUND@@ width: 44px; height: 44px">@@PLUS16@@</button>
+</div>
+<button onClick="{{ announce }}" style="height: 48px; border: 0; border-radius: 14px; background: var(--chip); color: var(--t); font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px">@@HORN@@<span>{{ announceLabel }}</span></button>
+</div>
+<h2 style="@@H2@@ margin-top: 8px">Scenes</h2>
+<div style="flex: 1 1 0; min-height: 120px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(56px, 1fr)); gap: 8px">
+<sc-for list="{{scenes}}" as="s" hint-placeholder-count="4">
+<button onClick="{{ s.run }}" aria-pressed="{{ s.active }}" style="border: 0; border-radius: var(--r); font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; {{ s.style }}">@@SCENE_ICONS@@<span>{{ s.label }}</span></button>
+</sc-for>
+</div>
+</section>
+</div>
+
+<section aria-label="Systems" style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="@@H2@@">Systems</h2><button onClick="{{ goInfra }}" style="border: 0; background: transparent; font-size: 13px; font-weight: 600; color: var(--acct); cursor: pointer; padding: 6px 0; display: inline-flex; align-items: center; gap: 6px">All infrastructure@@CHEV@@</button></div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{systems}}" as="s" hint-placeholder-count="6">
+<div style="@@CARD@@ height: 52px; box-sizing: border-box; display: flex; align-items: center; gap: 12px; padding: 0 14px">
+<span style="color: var(--m); display: flex; width: 20px; justify-content: center">@@SYS_ICONS@@</span>
+<span style="font-size: 14px; font-weight: 500; flex-grow: 1; @@NOWRAP@@">{{ s.name }}</span>
+@@SYS_STATUS@@
+</div>
+</sc-for>
+</div>
+</section>
+
+</div>
+</sc-if>
+
+<!-- ========== VOICE ========== -->
+<sc-if value="{{ isVoice }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div><h1 style="@@H1@@">Voice</h1><div style="@@MUTED@@ margin-top: 2px">Announcements through the Office speaker · Assist pipeline</div></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: stretch">
+<section aria-label="Announce" style="@@CARD@@ padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="@@H2@@">Announce on Office speaker</h2><span style="@@MUTED@@">{{ speakerState }}</span></div>
+<div style="@@MONO@@">media_player.office_speaker · tts.speak</div>
+<sc-for list="{{messages}}" as="msg" hint-placeholder-count="3">
+<button onClick="{{ msg.pick }}" aria-pressed="{{ msg.active }}" style="min-height: 56px; box-sizing: border-box; padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--r); text-align: left; font-size: 14px; line-height: 20px; cursor: pointer; {{ msg.style }}">{{ msg.text }}</button>
+</sc-for>
+<button onClick="{{ announce }}" style="height: 52px; border: 0; border-radius: 14px; background: var(--acc); color: var(--ona); font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px">@@HORN@@<span>{{ announceLabel }}</span></button>
+<div style="display: flex; align-items: center; gap: 8px">
+<button onClick="{{ togglePlay }}" aria-label="{{ playLabel }}" style="height: 48px; padding: 0 20px; border: 1px solid var(--line); border-radius: 9999px; background: transparent; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px"><sc-if value="{{ playing }}" hint-placeholder-val="{{ true }}">@@PAUSE16@@</sc-if><sc-if value="{{ paused }}" hint-placeholder-val="{{ false }}">@@PLAY16@@</sc-if><span>{{ playLabel }}</span></button>
+<button onClick="{{ volDown }}" aria-label="Volume down" style="@@ROUND@@ width: 48px; height: 48px">@@MINUS16@@</button>
+<div style="flex-grow: 1; height: 8px; border-radius: 9999px; background: var(--line)"><div style="height: 8px; border-radius: 9999px; background: var(--ink2); width: {{ volume }}%"></div></div>
+<button onClick="{{ volUp }}" aria-label="Volume up" style="@@ROUND@@ width: 48px; height: 48px">@@PLUS16@@</button>
+</div>
+</section>
+<div style="display: flex; flex-direction: column; gap: 16px; min-width: 0">
+<section aria-label="Announcement log" style="@@CARD@@ padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 2px">
+<h2 style="@@H2@@ margin-bottom: 6px">Recent announcements</h2>
+<sc-for list="{{log}}" as="e" hint-placeholder-count="2">
+<div style="display: flex; gap: 16px; padding: 10px 0; border-top: 1px solid var(--border)"><span style="@@MONO@@ font-size: 13px; flex-shrink: 0">{{ e.t }}</span><span style="font-size: 14px; line-height: 20px">{{ e.m }}</span></div>
+</sc-for>
+</section>
+<section aria-label="Voice pipeline" style="@@CARD@@ padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="@@H2@@">Assist pipeline</h2><span style="@@MUTED@@">blueprint</span></div>
+<sc-for list="{{pipeline}}" as="p" hint-placeholder-count="5">
+<div style="display: flex; align-items: center; gap: 12px"><span style="width: 28px; height: 28px; border-radius: 9999px; background: var(--chip); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0">{{ p.n }}</span><span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 14px; font-weight: 500">{{ p.name }}</span><span style="@@MONO@@">{{ p.entity }}</span></span></div>
+</sc-for>
+</section>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ========== ENERGY ========== -->
+<sc-if value="{{ isEnergy }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px">
+<div><h1 style="@@H1@@">Energy</h1><div style="@@MUTED@@ margin-top: 2px">Main meter and every connected device · tap a device to chart it</div></div>
+<div style="display: flex; gap: 8px">@@RANGE_CHIPS@@</div>
+</div>
+<div style="display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 20px; align-items: stretch">
+
+<div style="display: flex; flex-direction: column; gap: 16px; min-width: 0">
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{eKpis}}" as="k" hint-placeholder-count="4"><div style="@@CARD@@ box-sizing: border-box; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="@@MUTED@@ @@NOWRAP@@">{{ k.label }}</span><span style="font-size: 18px; line-height: 24px; font-weight: 600; @@NOWRAP@@">{{ k.value }}</span></div></sc-for>
+</div>
+<section aria-label="Usage chart" style="@@CARD@@ padding: 18px 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap"><span style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 36px; line-height: 40px">{{ chartTotal }}</span><span style="font-size: 14px; color: var(--m)">kWh · {{ chartName }} · {{ rangeNote }}</span></div>
+<div style="height: 200px; display: flex; align-items: flex-end; gap: 8px">
+<sc-for list="{{bars}}" as="b" hint-placeholder-count="12">
+<div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px"><span style="font-size: 11px; color: var(--m)">{{ b.value }}</span><div style="width: 100%; border-radius: 6px; {{ b.style }}"></div><span style="font-size: 11px; color: var(--m)">{{ b.label }}</span></div>
+</sc-for>
+</div>
+</section>
+<section aria-label="How it is measured" style="@@CARD@@ padding: 16px 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px">
+<h2 style="@@H2@@">How each device is measured</h2>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 13px; font-weight: 600">Live power</span><span style="@@MONO@@">sensor.&lt;device&gt;_power</span><span style="@@MUTED@@">device_class: power · W · state_class: measurement</span></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 13px; font-weight: 600">Energy used</span><span style="@@MONO@@">sensor.&lt;device&gt;_energy</span><span style="@@MUTED@@">device_class: energy · kWh · total_increasing</span></div>
+</div>
+<span style="@@MUTED@@">Plug reports only watts? A Riemann-sum helper turns it into kWh, then add it under Energy → Individual devices.</span>
+</section>
+</div>
+
+<section aria-label="Devices" style="@@CARD@@ padding: 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; min-width: 0">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="@@H2@@">Devices</h2><span style="@@MUTED@@">{{ devCount }} shown</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{cats}}" as="c" hint-placeholder-count="5"><button onClick="{{ c.pick }}" aria-pressed="{{ c.active }}" style="height: 36px; padding: 0 14px; border: 0; border-radius: 9999px; font-size: 13px; font-weight: 500; cursor: pointer; {{ c.style }}">{{ c.label }}</button></sc-for>
+</div>
+<div style="display: flex; gap: 6px">
+<sc-for list="{{metrics}}" as="c" hint-placeholder-count="2"><button onClick="{{ c.pick }}" aria-pressed="{{ c.active }}" style="height: 36px; padding: 0 14px; border: 0; border-radius: 9999px; font-size: 13px; font-weight: 500; cursor: pointer; {{ c.style }}">{{ c.label }}</button></sc-for>
+</div>
+<div style="flex: 1 1 0; min-height: 0; max-height: 430px; overflow-y: auto; scrollbar-width: none; display: flex; flex-direction: column; gap: 6px">
+<sc-for list="{{devices}}" as="d" hint-placeholder-count="12">
+<button onClick="{{ d.pick }}" aria-pressed="{{ d.selected }}" style="box-sizing: border-box; width: 100%; min-height: 56px; display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 14px; cursor: pointer; text-align: left; flex-shrink: 0; {{ d.rowStyle }}">
+<span style="width: 32px; height: 32px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; {{ d.iconStyle }}">@@DEV_ICONS@@</span>
+<span style="display: flex; flex-direction: column; min-width: 0; flex: 1 1 0; gap: 3px">
+<span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-size: 13px; font-weight: 500; @@NOWRAP@@">{{ d.name }}</span><span style="font-size: 13px; font-weight: 600; white-space: nowrap">{{ d.value }}</span></span>
+<span style="height: 5px; border-radius: 9999px; background: var(--line)"><span style="display: block; height: 5px; border-radius: 9999px; background: var(--acc); width: {{ d.pct }}%"></span></span>
+<span style="@@MONO@@ @@NOWRAP@@">{{ d.entity }}</span>
+</span>
+</button>
+</sc-for>
+</div>
+</section>
+</div>
+</div>
+</sc-if>
+
+<!-- ========== INFRASTRUCTURE ========== -->
+<sc-if value="{{ isInfra }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div><h1 style="@@H1@@">Infrastructure</h1><div style="@@MUTED@@ margin-top: 2px">Proxmox · Dokploy · domains · business APIs</div></div>
+<div style="display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px; align-items: start">
+
+<div style="display: flex; flex-direction: column; gap: 16px; min-width: 0">
+<section aria-label="Proxmox" style="@@CARD@@ padding: 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="@@CIRCLE@@ background: var(--accsoft); color: var(--acct)">@@CUBES@@</span>
+<span style="display: flex; flex-direction: column; flex-grow: 1"><span style="font-size: 15px; font-weight: 600">pve01 · Proxmox VE</span><span style="@@MONO@@">binary_sensor.pve01_status · uptime 41 d</span></span>
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 9999px; background: var(--chip); font-size: 12px; font-weight: 600"><span style="width: 8px; height: 8px; border-radius: 9999px; background: var(--ok)"></span>Online</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+<sc-for list="{{meters}}" as="m" hint-placeholder-count="3"><div style="display: flex; flex-direction: column; gap: 6px"><div style="display: flex; justify-content: space-between; font-size: 13px"><span style="color: var(--m)">{{ m.label }}</span><span style="font-weight: 600">{{ m.value }}</span></div><div style="height: 8px; border-radius: 9999px; background: var(--line)"><div style="height: 8px; border-radius: 9999px; width: {{ m.pct }}%; {{ m.bar }}"></div></div></div></sc-for>
+</div>
+<div style="display: flex; align-items: baseline; justify-content: space-between; margin-top: 4px"><h2 style="@@H2@@">VMs &amp; containers</h2><span style="@@MUTED@@">{{ vmSummary }}</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<sc-for list="{{vms}}" as="v" hint-placeholder-count="6">
+<div style="display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 4px 8px; border-radius: 14px; background: var(--chip)">
+<span style="width: 32px; height: 32px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; {{ v.iconStyle }}">@@VM_ICONS@@</span>
+<span style="display: flex; flex-direction: column; min-width: 0; flex: 1 1 0"><span style="font-size: 14px; font-weight: 500; @@NOWRAP@@">{{ v.name }}</span><span style="@@MONO@@ @@NOWRAP@@">{{ v.meta }}</span></span>
+<span style="font-size: 12px; color: var(--m); white-space: nowrap; width: 112px; text-align: right">{{ v.load }}</span>
+@@VM_STATUS@@
+<button onClick="{{ v.toggle }}" aria-label="{{ v.actionLabel }}" style="@@ROUND@@ width: 40px; height: 40px; background: var(--card)"><sc-if value="{{ v.isRunning }}" hint-placeholder-val="{{ true }}">@@STOP16@@</sc-if><sc-if value="{{ v.isStopped }}" hint-placeholder-val="{{ false }}">@@PLAY16@@</sc-if><sc-if value="{{ v.isBusy }}" hint-placeholder-val="{{ false }}">@@ROTATE16@@</sc-if></button>
+</div>
+</sc-for>
+</div>
+</section>
+<section aria-label="Business APIs" style="display: flex; flex-direction: column; gap: 8px">
+<h2 style="@@H2@@">Business APIs</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{apis}}" as="a" hint-placeholder-count="4">
+<div style="@@CARD@@ height: 56px; box-sizing: border-box; display: flex; align-items: center; gap: 12px; padding: 0 14px">
+<span style="color: var(--m); display: flex; width: 22px; justify-content: center">@@API_ICONS@@</span>
+<span style="display: flex; flex-direction: column; min-width: 0; flex: 1 1 0"><span style="font-size: 14px; font-weight: 500; @@NOWRAP@@">{{ a.name }}</span><span style="@@MUTED@@ @@NOWRAP@@">{{ a.sub }}</span></span>
+@@API_STATUS@@
+</div>
+</sc-for>
+</div>
+</section>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 16px; min-width: 0">
+<section aria-label="Domains" style="@@CARD@@ padding: 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="@@H2@@">Domains &amp; SSL</h2><span style="@@MUTED@@">Uptime Kuma</span></div>
+<sc-for list="{{domains}}" as="d" hint-placeholder-count="3">
+<div style="display: flex; align-items: center; gap: 10px; min-height: 52px; border-top: 1px solid var(--border); padding-top: 8px">
+<span style="width: 32px; height: 32px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--chip); color: var(--m)">@@DOM_ICONS@@</span>
+<span style="display: flex; flex-direction: column; min-width: 0; flex: 1 1 0"><span style="font-size: 14px; font-weight: 500; @@NOWRAP@@">{{ d.name }}</span><span style="@@MUTED@@ @@NOWRAP@@">{{ d.sub }}</span></span>
+@@DOM_STATUS@@
+</div>
+</sc-for>
+</section>
+<section aria-label="Dokploy" style="@@CARD@@ padding: 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="@@H2@@">Dokploy apps</h2><span style="@@MUTED@@">{{ appSummary }}</span></div>
+<sc-for list="{{apps}}" as="a" hint-placeholder-count="5">
+<div style="display: flex; align-items: center; gap: 10px; min-height: 52px; border-top: 1px solid var(--border); padding-top: 8px">
+<span style="width: 32px; height: 32px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--chip); color: var(--m)">@@APP_ICONS@@</span>
+<span style="display: flex; flex-direction: column; min-width: 0; flex: 1 1 0"><span style="font-size: 14px; font-weight: 500; @@NOWRAP@@">{{ a.name }}</span><span style="@@MUTED@@ @@NOWRAP@@">{{ a.sub }}</span></span>
+@@APP_STATUS@@
+<button onClick="{{ a.redeploy }}" aria-label="Redeploy" style="@@ROUND@@ width: 40px; height: 40px">@@ROTATE16@@</button>
+</div>
+</sc-for>
+</section>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ========== BACKUPS & STORAGE ========== -->
+<sc-if value="{{ isBackups }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px">
+<div><h1 style="@@H1@@">Backups &amp; storage</h1><div style="@@MUTED@@ margin-top: 2px">Scheduled jobs · server disks · cloud storage</div></div>
+<div style="display: flex; gap: 8px">@@JOB_CHIPS@@</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{bKpis}}" as="k" hint-placeholder-count="3"><div style="@@CARD@@ box-sizing: border-box; padding: 12px 16px; display: flex; flex-direction: column; gap: 2px"><span style="@@MUTED@@">{{ k.label }}</span><span style="font-size: 20px; line-height: 26px; font-weight: 600">{{ k.value }}</span></div></sc-for>
+</div>
+<div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 20px; align-items: start">
+<section aria-label="Backup jobs" style="@@CARD@@ padding: 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="@@H2@@">Scheduled jobs</h2><span style="@@MUTED@@">{{ jobCount }} shown</span></div>
+<sc-for list="{{jobs}}" as="j" hint-placeholder-count="6">
+<div style="display: flex; align-items: center; gap: 10px; min-height: 60px; border-top: 1px solid var(--border); padding-top: 8px">
+<span style="width: 36px; height: 36px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; {{ j.iconStyle }}">@@JOB_ICONS@@</span>
+<span style="display: flex; flex-direction: column; min-width: 0; flex: 1 1 0"><span style="font-size: 14px; font-weight: 500; @@NOWRAP@@">{{ j.name }}</span><span style="@@MUTED@@ @@NOWRAP@@">{{ j.sub }}</span><span style="@@MUTED@@ @@NOWRAP@@">{{ j.last }}</span></span>
+@@JOB_STATUS@@
+<button onClick="{{ j.run }}" style="height: 40px; padding: 0 14px; border: 0; border-radius: 9999px; background: var(--chip); font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0">@@ROTATE16@@<span>{{ j.action }}</span></button>
+</div>
+</sc-for>
+</section>
+<section aria-label="Storage" style="@@CARD@@ padding: 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="@@H2@@">Storage</h2><span style="@@MUTED@@">Storage sensors refresh every 6 h</span></div>
+<sc-for list="{{storage}}" as="s" hint-placeholder-count="5">
+<div style="display: flex; align-items: center; gap: 10px">
+<span style="color: var(--m); display: flex; width: 22px; justify-content: center">@@STO_ICONS@@</span>
+<span style="display: flex; flex-direction: column; flex: 1 1 0; min-width: 0; gap: 5px">
+<span style="display: flex; justify-content: space-between; gap: 8px; font-size: 13px"><span style="font-weight: 500; @@NOWRAP@@">{{ s.name }}</span><span style="color: var(--m); white-space: nowrap">{{ s.used }}</span></span>
+<span style="height: 8px; border-radius: 9999px; background: var(--line)"><span style="display: block; height: 8px; border-radius: 9999px; width: {{ s.pct }}%; {{ s.bar }}"></span></span>
+</span>
+<span style="font-size: 13px; font-weight: 600; width: 44px; text-align: right">{{ s.pctText }}</span>
+</div>
+</sc-for>
+<span style="@@MUTED@@">Warning at 80 %, critical at 90 %. Alerts go to your messaging app through an automation.</span>
+</section>
+</div>
+</div>
+</sc-if>
+
+</main>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1194,"height":834}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = {
+tab: 'overview',
+lights: { reception: true, dev: true, meeting: false, server: true },
+target: 23, mode: 'cool', locked: true,
+playing: true, volume: 55, scene: '', msg: 0, announcing: false,
+log: [{ t: '08:00', m: 'Good morning. Your first meeting is at ten.' }],
+range: 'today', cat: 'all', metric: 'w', dev: 'all',
+vms: { dokploy: 'running', ha: 'running', n8n: 'running', pbs: 'running', wp: 'running', dev: 'stopped' },
+apps: {}, jobFilter: 'all',
+jobs: { vzdump: 'ok', pbs: 'ok', pg: 'ok', ha: 'ok', wp: 'ok', n8n: 'fail' },
+jobTimes: {}
+};
+}
+renderVals() {
+const s = this.state;
+const ON = 'background: var(--accsoft); color: var(--acct);';
+const OFF = 'background: var(--chip); color: var(--m);';
+const ACT = 'background: var(--acc); color: var(--ona);';
+const IDLE = 'background: var(--chip); color: var(--t);';
+const OKDOT = 'background: var(--ok);', WARNDOT = 'background: var(--warn);', BADDOT = 'background: var(--bad);';
+const mk = (keys, k, pre) => { const o = {}; keys.forEach(x => { o[(pre || 'ic_') + x] = (x === k); }); return o; };
+const fix = (n, d) => Number(n).toFixed(d);
+
+/* ---------- lights, AC, power model ---------- */
+const lightDefs = [['reception', 'Reception', 18], ['dev', 'Dev room', 24], ['meeting', 'Meeting room', 20], ['server', 'Server corner', 12]];
+const lightW = (id) => { const d = lightDefs.find(x => x[0] === id); return s.lights[id] ? d[2] : 0; };
+const lightsW = lightDefs.reduce((a, d) => a + lightW(d[0]), 0);
+const acW = s.mode === 'off' ? 4 : (s.mode === 'fan' ? 90 : Math.max(150, Math.round(560 + (26 - s.target) * 120)));
+const lights = lightDefs.map(([id, name, w]) => ({
+name, on: s.lights[id],
+state: s.lights[id] ? 'On · ' + w + ' W' : 'Off · 0 W',
+iconStyle: s.lights[id] ? ON : OFF,
+toggle: () => this.setState({ lights: { ...s.lights, [id]: !s.lights[id] }, scene: '' })
+}));
+const sceneDefs = [
+['open', 'Open office', 'sun', { reception: true, dev: true, meeting: false, server: true }],
+['focus', 'Focus mode', 'focus', { reception: false, dev: true, meeting: false, server: true }],
+['client', 'Client meeting', 'hand', { reception: true, dev: false, meeting: true, server: true }],
+['close', 'Close office', 'moon', { reception: false, dev: false, meeting: false, server: false }]
+];
+const scenes = sceneDefs.map(([id, label, ico, set]) => ({
+label, active: s.scene === id, style: s.scene === id ? ACT : IDLE,
+...mk(@@SCENE_KEYS_JS@@, ico),
+run: () => this.setState({ lights: set, scene: id })
+}));
+const frac = (s.target - 16) / 14;
+const arcStyle = s.mode !== 'off'
+? 'stroke: var(--acc); transition: stroke-dasharray 0.3s; stroke-dasharray: ' + (75 * frac).toFixed(1) + ' 100'
+: 'stroke: transparent; stroke-dasharray: 0 100';
+const modes = [['cool', 'Cool', 'snow'], ['fan', 'Fan', 'fan'], ['off', 'Off', 'power']].map(([id, label, ico]) => ({
+label, active: s.mode === id, style: s.mode === id ? ACT : IDLE, ...mk(@@MODE_KEYS_JS@@, ico),
+pick: () => this.setState({ mode: id })
+}));
+const climateText = s.mode === 'off' ? 'Off' : (s.mode === 'fan' ? 'Fan only' : 'Cooling to ' + s.target + '°');
+
+/* ---------- energy devices ---------- */
+const devDefs = [
+['ac', 'Air conditioning', 'climate', 'snow', 'sensor.office_ac_power', acW, 5.7],
+['rack', 'Server rack (Proxmox + UPS)', 'it', 'server', 'sensor.rack_plug_power', 165, 3.9],
+['pcs', 'Workstations', 'it', 'pc', 'sensor.desk_plugs_power', 210, 1.6],
+['net', 'Network (router, switch, AP)', 'it', 'net', 'sensor.network_plug_power', 38, 0.9],
+['fridge', 'Pantry fridge', 'other', 'fridge', 'sensor.pantry_fridge_power', 55, 0.8],
+['coffee', 'Coffee machine', 'other', 'mug', 'sensor.coffee_plug_power', 0, 0.4],
+['printer', 'Printer', 'other', 'print', 'sensor.printer_plug_power', 3, 0.1],
+['l_dev', 'Light · Dev room', 'light', 'bulb', 'light.dev_room', lightW('dev'), 0.22],
+['l_rec', 'Light · Reception', 'light', 'bulb', 'light.reception', lightW('reception'), 0.15],
+['l_srv', 'Light · Server corner', 'light', 'bulb', 'light.server_corner', lightW('server'), 0.10],
+['l_meet', 'Light · Meeting room', 'light', 'bulb', 'light.meeting_room', lightW('meeting'), 0.05],
+['mini', 'Smart speaker', 'other', 'vol', 'sensor.mini_plug_power', 2, 0.05]
+];
+const MAIN_TODAY = 14.2, UNTRACKED_W = 28, RATE = 0.15, WK = 17.0;
+const sumToday = devDefs.reduce((a, d) => a + d[6], 0);
+const liveTotal = devDefs.reduce((a, d) => a + d[5], 0) + UNTRACKED_W;
+const catList = [['all', 'All'], ['climate', 'Climate'], ['it', 'IT & network'], ['light', 'Lighting'], ['other', 'Other']];
+const cats = catList.map(([id, label]) => ({ label, active: s.cat === id, style: s.cat === id ? ACT : IDLE, pick: () => this.setState({ cat: id }) }));
+const metrics = [['w', 'Live W'], ['kwh', s.range === 'today' ? 'Today kWh' : 'Week kWh']].map(([id, label]) => ({ label, active: s.metric === id, style: s.metric === id ? ACT : IDLE, pick: () => this.setState({ metric: id }) }));
+const val = (d) => s.metric === 'w' ? d[5] : (s.range === 'today' ? d[6] : d[6] * WK);
+const shown = devDefs.filter(d => s.cat === 'all' || d[2] === s.cat);
+const maxV = Math.max(1, ...shown.map(val));
+const devices = shown.map(d => {
+const sel = s.dev === d[0];
+const v = val(d);
+return {
+name: d[1], entity: d[4],
+value: s.metric === 'w' ? (d[5] >= 1000 ? fix(d[5] / 1000, 2) + ' kW' : d[5] + ' W') : fix(v, 2) + ' kWh',
+pct: Math.max(2, Math.round(v / maxV * 100)),
+selected: sel,
+rowStyle: sel ? 'border: 1px solid var(--acc); background: var(--accsoft);' : 'border: 1px solid transparent; background: var(--chip);',
+iconStyle: d[5] > 0 ? ON : OFF,
+...mk(@@DEV_KEYS_JS@@, d[3]),
+pick: () => this.setState({ dev: sel ? 'all' : d[0] })
+};
+});
+const selDef = devDefs.find(d => d[0] === s.dev);
+const share = selDef ? selDef[6] / MAIN_TODAY : 1;
+const pToday = [0.5, 0.4, 0.4, 0.6, 1.1, 1.6, 1.9, 2.1, 2.0, 1.6, 1.2, 0.8];
+const pWeek = [38.4, 41.2, 44.0, 40.1, 36.5, 22.3, 19.0];
+const base = s.range === 'today' ? pToday : pWeek;
+const data = base.map(v => v * share);
+const labels = s.range === 'today' ? ['00', '02', '04', '06', '08', '10', '12', '14', '16', '18', '20', '22'] : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const mx = Math.max(...data);
+const dec = selDef ? 2 : 1;
+const bars = data.map((v, i) => ({ value: fix(v, dec), label: labels[i], style: 'height: ' + Math.max(4, Math.round(v / mx * 140)) + 'px; background: ' + (v === mx ? 'var(--acc)' : 'var(--bar)') + ';' }));
+const chartTotal = fix(data.reduce((a, b) => a + b, 0), dec);
+const ranges = [['today', 'Today'], ['week', 'This week']].map(([id, label]) => ({ label, active: s.range === id, style: s.range === id ? ACT : IDLE, pick: () => this.setState({ range: id }) }));
+const eKpis = [
+{ label: 'Power now', value: fix(liveTotal / 1000, 2) + ' kW' },
+{ label: 'Today', value: fix(MAIN_TODAY, 1) + ' kWh' },
+{ label: 'Est. cost', value: '$' + fix(MAIN_TODAY * RATE, 2) },
+{ label: 'Devices tracked', value: fix(sumToday / MAIN_TODAY * 100, 1) + ' %' }
+];
+
+/* ---------- infrastructure ---------- */
+const vmDefs = [
+['dokploy', 'dokploy-host', 'VM 101 · Docker + Dokploy', 'server', '22 % · 5.1/8 GB'],
+['ha', 'homeassistant', 'VM 102 · HAOS', 'server', '6 % · 1.8/4 GB'],
+['n8n', 'n8n', 'LXC 201 · automation', 'cube', '4 % · 0.9/2 GB'],
+['wp', 'wordpress', 'LXC 202 · example.com', 'cube', '9 % · 1.2/2 GB'],
+['pbs', 'pbs', 'VM 301 · Proxmox Backup Server', 'server', '2 % · 1.1/4 GB'],
+['dev', 'dev-sandbox', 'VM 150 · testing', 'server', 'stopped']
+];
+const running = Object.values(s.vms).filter(x => x === 'running').length;
+const vms = vmDefs.map(([id, name, meta, ico, load]) => {
+const st = s.vms[id];
+return {
+name, meta, load: st === 'running' ? load : (st === 'busy' ? 'working…' : 'stopped'),
+iconStyle: st === 'running' ? ON : OFF,
+statusText: st === 'running' ? 'Running' : (st === 'busy' ? 'Working' : 'Stopped'),
+dot: st === 'running' ? OKDOT : (st === 'busy' ? WARNDOT : 'background: var(--m);'),
+isRunning: st === 'running', isStopped: st === 'stopped', isBusy: st === 'busy',
+actionLabel: st === 'running' ? 'Stop' : 'Start',
+...mk(@@VM_KEYS_JS@@, ico),
+toggle: () => {
+if (st === 'busy') return;
+const next = st === 'running' ? 'stopped' : 'running';
+this.setState({ vms: { ...s.vms, [id]: 'busy' } });
+setTimeout(() => this.setState({ vms: { ...this.state.vms, [id]: next } }), 1600);
+}
+};
+});
+const meters = [
+{ label: 'CPU', value: '34 %', pct: 34, bar: 'background: var(--acc);' },
+{ label: 'Memory', value: '39 / 64 GB', pct: 61, bar: 'background: var(--acc);' },
+{ label: 'Disk', value: '480 / 1000 GB', pct: 48, bar: 'background: var(--acc);' }
+];
+const domains = [
+{ name: 'example.com', sub: 'HTTP 200 · 142 ms · 99.98 % (30 d)', statusText: 'SSL 62 d', dot: OKDOT, ...mk(@@DOM_KEYS_JS@@, 'wp') },
+{ name: 'pay.example.com', sub: 'Payment service · 200 · 188 ms · 99.95 %', statusText: 'SSL 62 d', dot: OKDOT, ...mk(@@DOM_KEYS_JS@@, 'invoice') },
+{ name: 'example.org', sub: 'HTTP 200 · 121 ms · 99.99 % (30 d)', statusText: 'SSL 12 d', dot: WARNDOT, ...mk(@@DOM_KEYS_JS@@, 'globe') }
+];
+const appDefs = [
+['wpapp', 'example-website', 'WordPress · main', 'wp', '2 d ago'],
+['billing', 'payment-service', 'Payment service · main', 'invoice', '5 d ago'],
+['exampleapp', 'example-app', 'web app · main', 'globe', '1 d ago'],
+['wapi', 'example-api', 'API · main', 'rocket', '1 d ago'],
+['pg', 'postgres-main', 'database · 16', 'db', 'backup 03:00']
+];
+const apps = appDefs.map(([id, name, sub, ico, ago]) => {
+const busy = s.apps[id] === 'busy';
+return {
+name, sub: busy ? 'Deploying…' : sub + ' · ' + (s.apps[id] === 'done' ? 'just now' : ago),
+statusText: busy ? 'Deploying' : 'Healthy', dot: busy ? WARNDOT : OKDOT,
+...mk(@@APP_KEYS_JS@@, ico),
+redeploy: () => {
+if (busy) return;
+this.setState({ apps: { ...s.apps, [id]: 'busy' } });
+setTimeout(() => this.setState({ apps: { ...this.state.apps, [id]: 'done' } }), 2200);
+}
+};
+});
+const apis = [
+{ name: 'Messaging API', sub: 'via automation · 0 failed today', statusText: 'OK', dot: OKDOT, ...mk(@@API_KEYS_JS@@, 'wa') },
+{ name: 'Payments API', sub: 'webhooks · last event 6 min ago', statusText: 'OK', dot: OKDOT, ...mk(@@API_KEYS_JS@@, 'stripe') },
+{ name: 'Accounting API', sub: 'invoices sync · 14:20', statusText: 'OK', dot: OKDOT, ...mk(@@API_KEYS_JS@@, 'invoice') },
+{ name: 'Cloud storage API', sub: s.jobs.n8n === 'fail' ? 'token expired for workflow export' : 'all tokens valid', statusText: s.jobs.n8n === 'fail' ? 'Check' : 'OK', dot: s.jobs.n8n === 'fail' ? WARNDOT : OKDOT, ...mk(@@API_KEYS_JS@@, 'gdrive') }
+];
+
+/* ---------- backups & storage ---------- */
+const jobDefs = [
+['vzdump', 'Proxmox · all VMs & LXC', 'Daily 02:00 → PBS · 38.2 GB', 'Last run 02:14 today', 'server'],
+['pbs', 'PBS verify & prune', 'Sundays 04:00 · keep 7 d / 4 w / 3 m', 'Last run Sun 04:09', 'shield'],
+['pg', 'Dokploy · Postgres dumps', 'Daily 03:00 → Cloud · 2.4 GB', 'Last run 03:02 today', 'db'],
+['ha', 'Home Assistant full backup', 'Daily 04:30 → Cloud · 1.1 GB', 'Last run 04:31 today', 'house'],
+['wp', 'example.com files + DB', 'Daily 01:30 → Cloud · 6.8 GB', 'Last run 01:41 today', 'wp'],
+['n8n', 'Workflow export', 'Daily 05:00 → Cloud', 'Failed 2 days ago · cloud token expired', 'hub']
+];
+const jobStatus = (id) => s.jobs[id];
+const okCount = jobDefs.filter(j => jobStatus(j[0]) === 'ok').length;
+const jfList = [['all', 'All jobs'], ['attention', 'Needs attention']];
+const jobFilters = jfList.map(([id, label]) => ({ label, active: s.jobFilter === id, style: s.jobFilter === id ? ACT : IDLE, pick: () => this.setState({ jobFilter: id }) }));
+const jobShown = jobDefs.filter(j => s.jobFilter === 'all' || jobStatus(j[0]) !== 'ok');
+const jobs = jobShown.map(([id, name, sub, last, ico]) => {
+const st = jobStatus(id);
+return {
+name, sub,
+last: st === 'run' ? 'Running now…' : (s.jobTimes[id] ? 'Last run ' + s.jobTimes[id] + ' · just now' : last),
+statusText: st === 'ok' ? 'OK' : (st === 'run' ? 'Running' : 'Failed'),
+dot: st === 'ok' ? OKDOT : (st === 'run' ? WARNDOT : BADDOT),
+iconStyle: st === 'fail' ? 'background: var(--badbg); color: var(--bad);' : ON,
+action: st === 'fail' ? 'Retry' : 'Run now',
+...mk(@@JOB_KEYS_JS@@, ico),
+run: () => {
+if (st === 'run') return;
+this.setState({ jobs: { ...s.jobs, [id]: 'run' } });
+const d = new Date(); const t = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+setTimeout(() => this.setState({ jobs: { ...this.state.jobs, [id]: 'ok' }, jobTimes: { ...this.state.jobTimes, [id]: t } }), 2200);
+}
+};
+});
+const stoDefs = [
+['Proxmox local-lvm', '480 / 1000 GB', 48, 'hdd'],
+['PBS datastore', '1.6 / 2.0 TB', 80, 'shield'],
+['Dokploy host disk', '62 / 100 GB', 62, 'rocket'],
+['Cloud storage', '1.36 / 2 TB', 68, 'gdrive'],
+['HA backups in cloud', '18.6 GB · 12 copies', 9, 'house']
+];
+const storage = stoDefs.map(([name, used, pct, ico]) => ({
+name, used, pct, pctText: pct + '%',
+bar: pct >= 90 ? 'background: var(--bad);' : (pct >= 80 ? 'background: var(--warn);' : 'background: var(--acc);'),
+...mk(@@STO_KEYS_JS@@, ico)
+}));
+const bKpis = [
+{ label: 'Jobs healthy', value: okCount + ' / ' + jobDefs.length },
+{ label: 'Last full backup', value: '02:14 today' },
+{ label: 'Protected data', value: '412 GB' }
+];
+
+/* ---------- navigation ---------- */
+const tabDefs = [['overview', 'Overview'], ['voice', 'Voice'], ['energy', 'Energy'], ['infra', 'Infra'], ['backups', 'Backups']];
+const tabs = tabDefs.map(([id, label]) => ({
+label, current: s.tab === id ? 'page' : 'false',
+extra: s.tab === id ? 'color: var(--acct); border-bottom-color: var(--acc);' : 'color: var(--m);',
+go: () => this.setState({ tab: id })
+}));
+const railDefs = [['overview', 'Overview', 'house'], ['voice', 'Voice', 'mic'], ['energy', 'Energy', 'bolt'], ['infra', 'Infrastructure', 'server'], ['backups', 'Backups', 'shield']];
+const rail = railDefs.map(([id, label, ico]) => ({
+label, current: s.tab === id ? 'page' : 'false',
+style: s.tab === id ? ON : 'background: transparent; color: var(--m);',
+...mk(@@RAIL_KEYS_JS@@, ico),
+go: () => this.setState({ tab: id })
+}));
+const kpis = [
+{ value: fix(liveTotal / 1000, 2) + ' kW', label: 'Power now', ico: 'bolt', go: () => this.setState({ tab: 'energy' }), iconStyle: ON },
+{ value: running + ' / ' + vmDefs.length + ' up', label: 'Infrastructure', ico: 'server', go: () => this.setState({ tab: 'infra' }), iconStyle: ON },
+{ value: okCount + ' / ' + jobDefs.length + ' OK', label: 'Backups', ico: 'shield', go: () => this.setState({ tab: 'backups' }), iconStyle: okCount < jobDefs.length ? 'background: var(--warnbg); color: var(--warn);' : ON },
+{ value: '68 %', label: 'Cloud storage', ico: 'cloud', go: () => this.setState({ tab: 'backups' }), iconStyle: ON }
+].map(k => ({ ...k, ...mk(@@KPI_KEYS_JS@@, k.ico) }));
+const sysDefs = [
+['Home Assistant', 'house', 'Online', OKDOT], ['Proxmox VE', 'cubes', running + ' / ' + vmDefs.length + ' up', OKDOT],
+['Dokploy', 'rocket', 'Online', OKDOT], ['n8n', 'hub', 'Online', OKDOT],
+['example.com', 'wp', 'Online', OKDOT], ['example.org', 'globe', 'SSL 12 d', WARNDOT]
+];
+const systems = sysDefs.map(([name, ico, statusText, dot]) => ({ name, statusText, dot, ...mk(@@SYS_KEYS_JS@@, ico) }));
+
+/* ---------- voice ---------- */
+const msgTexts = ['Good morning. Your first meeting is at ten.', 'A client has arrived at reception.', 'The nightly backup completed successfully.'];
+const messages = msgTexts.map((text, i) => ({
+text, active: s.msg === i,
+style: s.msg === i ? 'background: var(--accsoft); border-color: var(--acc);' : 'background: transparent;',
+pick: () => this.setState({ msg: i })
+}));
+const announce = () => {
+const d = new Date();
+const t = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+this.setState({ announcing: true, log: [{ t, m: msgTexts[s.msg] }, ...s.log].slice(0, 5) });
+setTimeout(() => this.setState({ announcing: false }), 2500);
+};
+const pipeline = [
+{ n: 1, name: 'Wake word & mic (satellite)', entity: 'assist_satellite.office' },
+{ n: 2, name: 'Speech to text', entity: 'stt.faster_whisper' },
+{ n: 3, name: 'Conversation agent', entity: 'conversation.home_assistant' },
+{ n: 4, name: 'Text to speech', entity: 'tts.piper' },
+{ n: 5, name: 'Speaker output', entity: 'media_player.office_speaker' }
+];
+
+return {
+isOverview: s.tab === 'overview', isVoice: s.tab === 'voice', isEnergy: s.tab === 'energy', isInfra: s.tab === 'infra', isBackups: s.tab === 'backups',
+tabs, rail, kpis, systems, lights, scenes, modes, messages, pipeline, ranges, cats, metrics, devices, bars, eKpis,
+vms, meters, domains, apps, apis, jobs, jobFilters, storage, bKpis, log: s.log,
+lightsW, acW,
+goInfra: () => this.setState({ tab: 'infra' }),
+locked: s.locked, unlocked: !s.locked,
+lockText: s.locked ? 'Locked' : 'Unlocked',
+lockIconStyle: s.locked ? ON : 'background: var(--warnbg); color: var(--warn);',
+toggleLock: () => this.setState({ locked: !s.locked }),
+targetText: s.target + '°', climateText, arcStyle,
+tempDown: () => this.setState({ target: Math.max(16, s.target - 1) }),
+tempUp: () => this.setState({ target: Math.min(30, s.target + 1) }),
+playing: s.playing, paused: !s.playing, playLabel: s.playing ? 'Pause' : 'Play',
+nowPlaying: s.playing ? 'Morning briefing' : 'Paused', speakerState: s.playing ? 'Playing' : 'Paused',
+togglePlay: () => this.setState({ playing: !s.playing }),
+volume: s.volume,
+volDown: () => this.setState({ volume: Math.max(0, s.volume - 5) }),
+volUp: () => this.setState({ volume: Math.min(100, s.volume + 5) }),
+announce, announceLabel: s.announcing ? 'Announcing…' : 'Announce',
+chartTotal, chartName: selDef ? selDef[1] : 'All devices',
+rangeNote: s.range === 'today' ? 'per 2 hours' : 'per day',
+devCount: devices.length, vmSummary: running + ' of ' + vmDefs.length + ' running',
+appSummary: Object.values(s.apps).includes('busy') ? 'deploying…' : 'all healthy',
+jobCount: jobs.length
+};
+}
+}
+</script>
+</body>
+</html>

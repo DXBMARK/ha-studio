@@ -1,0 +1,19 @@
+name: ci
+on: [push, pull_request]
+permissions: {contents: read}
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: {python-version: ["3.10", "3.12"]}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "${{ matrix.python-version }}"}
+      - run: pip install pytest PyYAML
+      - run: python3 skills/ha-studio/scripts/lint_skill.py
+      - run: python3 skills/ha-studio/scripts/contrast_check.py
+      - run: pytest -q
+      - run: python3 tools/build_release.py
+      - uses: actions/upload-artifact@v4
+        with: {name: dist, path: dist/}

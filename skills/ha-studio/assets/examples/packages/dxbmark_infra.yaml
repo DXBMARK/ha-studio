@@ -1,0 +1,58 @@
+# Example Home Assistant "package": infrastructure + backup KPIs for the Infra and Backups tabs.
+# Copy to <config>/packages/ (needs `homeassistant: packages: !include_dir_named packages`),
+# create the secrets below in secrets.yaml, run Developer tools → YAML → Check configuration, then reload.
+# Written by DXBMARK LLC (Apache-2.0). Test on a non-production instance first.
+# Entity ids below (sensor.backup_last_successful, *_cert_expiry) are PLACEHOLDERS: replace them with the ids your
+# backup and cert_expiry integrations actually create (see your inventory). example.com / example.org are sample hosts.
+
+rest:
+  # Dokploy: list projects. Dokploy authenticates API calls with an `x-api-key` header.
+  - resource: !secret dokploy_projects_url        # e.g. https://dokploy.example.com/api/project.all
+    scan_interval: 300
+    headers:
+      x-api-key: !secret dokploy_api_key
+      accept: application/json
+    sensor:
+      - name: "Dokploy Projects"
+        unique_id: dokploy_projects_count
+        value_template: "{{ value_json | length }}"
+        state_class: measurement
+
+template:
+  - sensor:
+      # Days until a certificate expires (cert_expiry integration provides a timestamp sensor per host)
+      - name: "example.com Cert Days Left"
+        unique_id: example_com_cert_days_left
+        unit_of_measurement: d
+        state_class: measurement
+        state: "{{ (states('sensor.cert_expiry_timestamp_example_com') | as_datetime - now()).days }}"
+        availability: "{{ states('sensor.cert_expiry_timestamp_example_com') not in ['unknown', 'unavailable'] }}"
+      - name: "example.org Cert Days Left"
+        unique_id: example_org_cert_days_left
+        unit_of_measurement: d
+        state_class: measurement
+        state: "{{ (states('sensor.cert_expiry_timestamp_example_org') | as_datetime - now()).days }}"
+        availability: "{{ states('sensor.cert_expiry_timestamp_example_org') not in ['unknown', 'unavailable'] }}"
+  - binary_sensor:
+      # ON = problem: the newest successful backup is older than 26 hours (daily job + slack)
+      - name: "Backup Stale"
+        unique_id: backup_stale
+        device_class: problem
+        state: >
+          {{ (now() - states('sensor.backup_last_successful') | as_datetime).total_seconds() > 93600 }}
+        availability: "{{ states('sensor.backup_last_successful') not in ['unknown', 'unavailable'] }}"
+
+automation:
+  - alias: "DXBMARK · Notify when backup is stale"
+    id: dxbmark_backup_stale_notify
+    mode: single
+    triggers:
+      - trigger: state
+        entity_id: binary_sensor.backup_stale
+        to: "on"
+        for: "00:10:00"
+    actions:
+      - action: notify.notify            # replace with your mobile_app_* notify target
+        data:
+          title: "Backup is stale"
+          message: "No successful backup for more than 26 hours."

@@ -1,0 +1,10 @@
+# Example area map for --areas. Get your own from Developer tools > Template:
+#   {% for a in areas() %}{{ area_name(a) }}: {{ area_entities(a) }}{{ "\n" }}{% endfor %}
+Reception:
+  - light.reception
+  - lock.main_door
+Meeting room:
+  - light.meeting_room
+  - climate.meeting_room_ac
+Server room:
+  - light.server_room
