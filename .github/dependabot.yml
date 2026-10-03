@@ -1,11 +1,15 @@
 version: 2
+# Minor and patch updates only; major versions are reviewed and bumped by hand.
 updates:
   - package-ecosystem: github-actions
     directory: /
     schedule: {interval: weekly}
+    ignore: [{dependency-name: "*", update-types: ["version-update:semver-major"]}]
   - package-ecosystem: pip
     directory: /
     schedule: {interval: weekly}
+    ignore: [{dependency-name: "*", update-types: ["version-update:semver-major"]}]
   - package-ecosystem: docker
     directory: /docker
     schedule: {interval: weekly}
+    ignore: [{dependency-name: "*", update-types: ["version-update:semver-major"]}]

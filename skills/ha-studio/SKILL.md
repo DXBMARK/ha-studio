@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Works offline from an exported states file; live read-only inventory needs a Home Assistant URL and a long-lived token in the environment. Python 3.10+ with PyYAML; Playwright only for screenshots. Independent project, compatible with Home Assistant, not affiliated with or endorsed by it.
 metadata:
   owner: DXBMARK LLC
-  version: 1.0.0
+  version: 1.1.0
   upstream-licences: see THIRD_PARTY_NOTICES.md
 ---
 

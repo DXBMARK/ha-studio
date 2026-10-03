@@ -150,6 +150,22 @@ python3 $S/build_design.py --out preview/ --brand "My Company"
 ```
 لا تستبدل السكربتات ملف إخراج موجوداً إلا مع `--force`. للتطبيق، الصق `dashboard.yaml` في محرّر الإعداد الخام للوحة، أو اربطه من لوحة بوضع YAML. استخدم `assets/examples/packages/dxbmark_infra.yaml` نقطة بداية لمؤشرات Proxmox/Dokploy/الشهادات/النسخ الاحتياطي.
 
+## جرّبه محلياً (أمر واحد)
+
+```bash
+pip install -r requirements-test.txt
+python3 tools/serve_demo.py            # يبني كل شيء على بيانات العرض المرفقة ثم يخدمه على http://127.0.0.1:8099/
+```
+يشغّل خط العمل كاملاً (جرد ← تدقيق الطاقة ← ثيم ← لوحة Lovelace بعرض الغرف وتبويبات المدراء ← تحقق ← تقرير التباين ← ثلاث معاينات آيباد تفاعلية ← صفحات المكوّنات والأيقونات) ويفتح صفحة فهرس بكل النتائج. لا شيء يغادر جهازك. استخدم `--states-file my_states.json` لتصدير Home Assistant الخاص بك، و`--port` لتغيير المنفذ، و`--no-serve` للبناء فقط.
+
+### لماذا صورة Docker؟
+اختيارية. المهارة نفسها لا تحتاج Docker. الصورة `ghcr.io/dxbmark/ha-studio` ([GitHub Packages](https://github.com/orgs/DXBMARK/packages?repo_name=ha-studio)) تضم Python وPyYAML لتشغيل أدوات سطر الأوامر على خادم أو CI دون تثبيت أي شيء:
+```bash
+docker run --rm -v "$PWD":/work ghcr.io/dxbmark/ha-studio:1.1.0 generate_lovelace inventory.json --profile office --out dashboard.yaml
+docker run --rm ghcr.io/dxbmark/ha-studio:1.1.0 --help      # قائمة الأدوات
+```
+تعمل بمستخدم غير جذري ولا تجري اتصالات شبكة من تلقاء نفسها. لا يوجد فهرس Python في GitHub Packages، فالحاوية هي طريقة هذا المستودع للنشر كحزمة.
+
 ## كيف تعمل المهارة
 
 ```
@@ -171,7 +187,7 @@ Intake → Inventory → Classify & KPI plan → Energy audit → Design → Gen
 skills/ha-studio/   the skill (SKILL.md, scripts/, references/, assets/)
 .claude-plugin/             Claude Code plugin + marketplace manifests
 chatgpt/                    ChatGPT instructions (full + lite)
-tools/                      build_release.py, install.py, make_screenshots.py
+tools/                      build_release.py, install.py, make_screenshots.py, serve_demo.py
 tests/                      pytest suite          docs/screenshots/  README images
 AGENTS.md  GEMINI.md  gemini-extension.json      platform adapters
 README.ar.md                                      Arabic
@@ -224,15 +240,7 @@ python3 tools/make_screenshots.py     # regenerate docs/screenshots (needs Playw
 [![زيارة الموقع](https://img.shields.io/badge/Visit%20Website-www.dxbmark.com-f97e1a?style=for-the-badge&logo=googlechrome&logoColor=white)](https://www.dxbmark.com)
 [![راسلنا](https://img.shields.io/badge/Contact%20Us-info%40dxbmark.com-0b1220?style=for-the-badge&logo=gmail&logoColor=f97e1a)](mailto:info@dxbmark.com)
 [![تابعنا على لينكدإن](https://img.shields.io/badge/Follow%20on-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/dxbmark)
-
-### لنتواصل
-
-| | |
-|---|---|
-| **لينكدإن** | [linkedin.com/company/dxbmark](https://www.linkedin.com/company/dxbmark) |
-| **البريد** | [info@dxbmark.com](mailto:info@dxbmark.com) |
-| **واتساب** | [+971 50 512 1583](https://wa.me/971505121583) |
-| **الموقع** | [www.dxbmark.com](https://www.dxbmark.com) |
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-%2B971%2050%20512%201583-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/971505121583)
 
 <sub>© 2026 DXBMARK LLC · Apache-2.0 · دبي، الإمارات &nbsp;|&nbsp; ⭐ ضع نجمة للمستودع إن أفادك HA Studio</sub>
 

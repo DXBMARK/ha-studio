@@ -1,6 +1,6 @@
 {
   "name": "ha-studio",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Plan, design and generate business-grade Home Assistant dashboards: KPIs, per-device energy, cameras, infrastructure, backups and voice.",
   "author": { "name": "DXBMARK LLC" },
   "license": "Apache-2.0",

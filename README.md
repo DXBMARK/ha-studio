@@ -144,6 +144,22 @@ python3 $S/build_design.py --out preview/ --brand "My Company"
 ```
 The scripts never overwrite an existing output file unless you pass `--force`. Apply by pasting `dashboard.yaml` into a dashboard's raw configuration editor, or reference it from a YAML-mode dashboard. Use `assets/examples/packages/dxbmark_infra.yaml` as a starting point for Proxmox/Dokploy/certificate/backup KPIs.
 
+## Try it locally (one command)
+
+```bash
+pip install -r requirements-test.txt
+python3 tools/serve_demo.py            # builds everything on the bundled demo data, then serves http://127.0.0.1:8099/
+```
+It runs the whole pipeline (inventory → energy audit → theme → Lovelace dashboard with Rooms view and admin-only tabs → validation → contrast report → three interactive iPad previews → component and icon sheets) and opens an index page with every result. Nothing leaves your computer. Use `--states-file my_states.json` for your own Home Assistant export, `--port` to change the port, `--no-serve` to build only.
+
+### Why a Docker image?
+Optional. The skill itself needs no Docker. The image `ghcr.io/dxbmark/ha-studio` ([GitHub Packages](https://github.com/orgs/DXBMARK/packages?repo_name=ha-studio)) bundles Python and PyYAML so the command-line tools run on a server or CI without installing anything:
+```bash
+docker run --rm -v "$PWD":/work ghcr.io/dxbmark/ha-studio:1.1.0 generate_lovelace inventory.json --profile office --out dashboard.yaml
+docker run --rm ghcr.io/dxbmark/ha-studio:1.1.0 --help      # list the tools
+```
+It runs as a non-root user and makes no network calls on its own. GitHub Packages has no Python index, so a container is how this repository publishes a package.
+
 ## How the skill works
 
 ```
@@ -165,7 +181,7 @@ Glass that stays readable: text ≥ 4.5:1 and UI marks ≥ 3:1 measured on the c
 skills/ha-studio/   the skill (SKILL.md, scripts/, references/, assets/)
 .claude-plugin/             Claude Code plugin + marketplace manifests
 chatgpt/                    ChatGPT instructions (full + lite)
-tools/                      build_release.py, install.py, make_screenshots.py
+tools/                      build_release.py, install.py, make_screenshots.py, serve_demo.py
 tests/                      pytest suite          docs/screenshots/  README images
 AGENTS.md  GEMINI.md  gemini-extension.json      platform adapters
 README.ar.md                                      Arabic (full translation)
@@ -216,15 +232,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) (DCO sign-off, original wording only), [S
 [![Visit Website](https://img.shields.io/badge/Visit%20Website-www.dxbmark.com-f97e1a?style=for-the-badge&logo=googlechrome&logoColor=white)](https://www.dxbmark.com)
 [![Contact Us](https://img.shields.io/badge/Contact%20Us-info%40dxbmark.com-0b1220?style=for-the-badge&logo=gmail&logoColor=f97e1a)](mailto:info@dxbmark.com)
 [![Follow on LinkedIn](https://img.shields.io/badge/Follow%20on-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/dxbmark)
-
-### Let's connect
-
-| | |
-|---|---|
-| **LinkedIn** | [linkedin.com/company/dxbmark](https://www.linkedin.com/company/dxbmark) |
-| **Email** | [info@dxbmark.com](mailto:info@dxbmark.com) |
-| **WhatsApp** | [+971 50 512 1583](https://wa.me/971505121583) |
-| **Website** | [www.dxbmark.com](https://www.dxbmark.com) |
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-%2B971%2050%20512%201583-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/971505121583)
 
 <sub>© 2026 DXBMARK LLC · Apache-2.0 · Dubai, UAE &nbsp;|&nbsp; ⭐ Star the repo if HA Studio helps your business</sub>
 

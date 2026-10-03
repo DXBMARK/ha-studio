@@ -54,15 +54,18 @@ def test_no_home_assistant_logo_or_forbidden_wording():
             assert not bad.search(t), f
     assert not list(REPO.rglob('*logo*'))
 
+VER = json.loads((REPO / '.claude-plugin/plugin.json').read_text())['version']
+
+
 def test_release_build(tmp_path):
     r = subprocess.run([sys.executable, REPO / 'tools/build_release.py', '--out', tmp_path], capture_output=True, text=True)
     assert r.returncode == 0, r.stderr + r.stdout
-    z = tmp_path / 'ha-studio-1.0.0.zip'
+    z = tmp_path / f'ha-studio-{VER}.zip'
     names = zipfile.ZipFile(z).namelist()
     assert 'ha-studio/SKILL.md' in names                      # skill folder at ZIP root
     assert not any(n.startswith('ha-studio/ha-studio') for n in names)
     assert not any('__pycache__' in n for n in names)
-    pack = zipfile.ZipFile(tmp_path / 'chatgpt-pack-1.0.0.zip').namelist()
+    pack = zipfile.ZipFile(tmp_path / f'chatgpt-pack-{VER}.zip').namelist()
     assert 'instructions.md' in pack and all('/' not in n.split('knowledge/', 1)[-1] for n in pack if n.startswith('knowledge/'))
     assert len([n for n in pack if n.startswith('knowledge/')]) <= 20  # ChatGPT project file caps
     assert (tmp_path / 'SHA256SUMS').read_text().count('\n') == 3

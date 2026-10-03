@@ -1,6 +1,6 @@
 {
   "name": "ha-studio",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Business-grade Home Assistant dashboard design and generation by DXBMARK LLC.",
   "contextFileName": "GEMINI.md"
 }

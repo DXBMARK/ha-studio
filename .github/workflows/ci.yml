@@ -7,13 +7,13 @@ jobs:
     strategy:
       matrix: {python-version: ["3.10", "3.12"]}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with: {python-version: "${{ matrix.python-version }}"}
-      - run: pip install pytest PyYAML
+      - run: pip install -r requirements-test.txt
       - run: python3 skills/ha-studio/scripts/lint_skill.py
       - run: python3 skills/ha-studio/scripts/contrast_check.py
       - run: pytest -q
       - run: python3 tools/build_release.py
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with: {name: dist, path: dist/}

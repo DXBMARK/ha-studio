@@ -1,0 +1,3 @@
+# Exact versions verified with the test suite on Python 3.10 and 3.12 (minor/patch updates only; no major bumps).
+pytest==8.4.2
+PyYAML==6.0.3
