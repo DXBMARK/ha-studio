@@ -7,6 +7,8 @@ This repository ships one Agent Skill: `skills/ha-studio/` (open Agent Skills fo
   and follow its workflow.
 - Read-only by default: never change a Home Assistant instance, config directory or user files without explicit permission.
 - Never put tokens or secrets into generated files, URLs, screenshots or commits.
+- Generator options: `--areas FILE` (Rooms view from a user-supplied area map), `--admin-user USER_ID` (core view
+  `visible` for admin-only tabs). Custom HACS cards (bubble-card, Mushroom, card-mod) are optional, never required.
 - Before claiming completion run `pytest -q` and
   `python3 skills/ha-studio/scripts/lint_skill.py`.
 - Codex/Antigravity: place or symlink the skill folder in `.agents/skills/`.

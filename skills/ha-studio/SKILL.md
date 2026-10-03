@@ -50,7 +50,9 @@ Copy this checklist and tick as you go:
 ### 1 Intake
 Ask only what changes the build: business type (→ `assets/profiles/*.yaml`: office, retail, cafe, clinic,
 hotel, warehouse, devops), screen types, tariff/currency, who may see cameras, languages (RTL for Arabic),
-which infra to show (Proxmox, Dokploy, domains, backup targets). If the person is away, take the most
+which infra to show (Proxmox, Dokploy, domains, backup targets), **rooms** (the person supplies an area → entity
+map; areas are never guessed), **who is an admin** (HA user ids that may see Energy/Security/Infra/Backups) and whether
+optional custom cards are wanted. If the person is away, take the most
 reasonable reading, state it at the top, and continue.
 
 ### 2 Inventory
@@ -75,9 +77,19 @@ edit — all pairs must pass. Rules for glass, wall panels, touch sizes, states 
 
 ### 6 Generate
 ```
-python3 scripts/generate_lovelace.py inventory.json --profile office --theme dxbmark_aurora --title "…" --out dashboard.yaml
+python3 scripts/generate_lovelace.py inventory.json --profile office --theme dxbmark_aurora --title "…" --out dashboard.yaml \
+    [--areas areas.yaml] [--admin-user <HA_USER_ID> ...] [--force]
 python3 scripts/gen_theme.py aurora --out themes/dxbmark_aurora.yaml
 ```
+- `--areas FILE` (`{"Reception": ["light.reception", "lock.main_door"]}`, example `assets/examples/demo_areas.yaml`) adds a
+  **Rooms** view, one section per area. Entities missing or unavailable are reported as gaps, not invented. How to get the
+  map: `references/community-patterns.md`.
+- `--admin-user USER_ID` (repeatable) sets the core view option `visible: [{user: <id>}]` on the Energy, Security, Infra
+  and Backups views, so other users do not see those tabs. Visibility hides tabs; it is not an access-control boundary.
+- **Optional custom cards** (bubble-card, Mushroom, card-mod, button-card, apexcharts-card via HACS) are polish only.
+  The generated baseline uses core cards and works without them; if the client wants them, list each as an explicit
+  dependency to install first and never output a card type that is not installed.
+
 Infra/backup KPIs (Proxmox, Dokploy, certificates, Google Drive, stale-backup alert) come from
 `assets/examples/packages/dxbmark_infra.yaml` plus `references/infrastructure.md`. Prefer HA-native mechanisms
 (official integrations, REST sensors, template sensors, webhooks). n8n is optional and licence-restricted

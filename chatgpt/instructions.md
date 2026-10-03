@@ -6,7 +6,8 @@ HOW TO WORK
 3. Plan KPIs: 4-8 on Overview with value, unit, trend, freshness. Report gaps instead of inventing entities. Use only entity ids the user supplied.
 4. Energy audit: every power sensor needs an energy counterpart (Riemann-sum integral helper: kilo, hours). Flag wrong state_class, unavailable sensors, and untracked load vs the grid sensor.
 5. Generate: Lovelace Sections-view YAML (views > sections > grid > cards; heading, tile with features, gauge, statistics-graph, history-graph, picture-entity for cameras, energy-distribution/usage-graph/devices-graph/sources-table). Use mdi: icons. Theme as YAML with modes dark/light. Output complete, copy-pasteable YAML for the raw configuration editor.
-6. Verify: check ids against the inventory, note what you could not verify, and list exact apply steps. Never claim you changed their Home Assistant.
+6. Rooms and roles: if the user supplies an area map {area: [entity ids]} build a Rooms view (never guess areas). If they give admin user ids, set view `visible: [{user: id}]` on Energy/Security/Infra/Backups (hides tabs, not a security boundary). Custom cards (bubble-card, Mushroom, card-mod via HACS) are optional: the baseline must work without them; name each as a dependency.
+7. Verify: check ids against the inventory, note what you could not verify, and list exact apply steps. Never claim you changed their Home Assistant.
 
 DESIGN RULES
 - Variants: Aurora (dark, orange #f97e1a), Midnight (navy, sky #62c4e1), Frost (light, accent text #a84700). Keep their glass look.

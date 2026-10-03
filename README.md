@@ -6,7 +6,15 @@
 
 [Arabic / عربي](README.ar.md) · [Claude](#claude-code) · [Claude.ai](#claudeai) · [Codex](#codex-openai) · [ChatGPT](#chatgpt) · [Gemini](#gemini) · [Antigravity](#antigravity)
 
-`Apache-2.0` · `Agent Skills open format` · `Python 3.10+` · by **DXBMARK LLC**
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square)](LICENSE)
+[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-open%20format-8A2BE2?style=flat-square)](https://agentskills.io)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org)
+[![Tests](https://img.shields.io/github/actions/workflow/status/DXBMARK/ha-studio/ci.yml?branch=main&label=tests&style=flat-square)](https://github.com/DXBMARK/ha-studio/actions/workflows/ci.yml)
+[![Security scan: CodeQL](https://img.shields.io/github/actions/workflow/status/DXBMARK/ha-studio/codeql.yml?branch=main&label=CodeQL&style=flat-square)](https://github.com/DXBMARK/ha-studio/actions/workflows/codeql.yml)
+[![Release](https://img.shields.io/github/v/release/DXBMARK/ha-studio?style=flat-square&color=f97e1a)](https://github.com/DXBMARK/ha-studio/releases)
+[![GitHub stars](https://img.shields.io/github/stars/DXBMARK/ha-studio?style=flat-square&color=f97e1a)](https://github.com/DXBMARK/ha-studio/stargazers)
+
+by **DXBMARK LLC**
 
 ![Aurora overview](docs/screenshots/aurora-overview.webp)
 
@@ -62,7 +70,7 @@ All screenshots are generated from sample data (fictional users, `example.com` h
 
 ## Install
 
-Pick your platform. The skill is one folder in the open [Agent Skills](https://agentskills.io) format; adapters only package it. Replace `DXBMARK/ha-studio` with the repository's actual path.
+Pick your platform. The skill is one folder in the open [Agent Skills](https://agentskills.io) format; adapters only package it. 
 
 ### Claude Code
 
@@ -95,7 +103,7 @@ Invoke with `$ha-studio` or just describe the task. The included [AGENTS.md](AGE
 ### ChatGPT
 ChatGPT has no install-from-GitHub. Choose one:
 - **Skills** (Business / Enterprise / Edu, if enabled by your admin): upload the skill ZIP. *Upload format not verified by DXBMARK.*
-- **Project** (Plus/Pro): create a Project, paste `chatgpt/instructions.md` (≈3.2k characters) as instructions and upload the files from `chatgpt-pack-<version>.zip → knowledge/`.
+- **Project** (Plus/Pro): create a Project, paste `chatgpt/instructions.md` (≈3.6k characters) as instructions and upload the files from `chatgpt-pack-<version>.zip → knowledge/`.
 - **Free/Go or custom instructions**: paste `chatgpt/instructions-lite.md` (≈0.7k characters).
 
 ### Gemini
@@ -160,8 +168,8 @@ chatgpt/                    ChatGPT instructions (full + lite)
 tools/                      build_release.py, install.py, make_screenshots.py
 tests/                      pytest suite          docs/screenshots/  README images
 AGENTS.md  GEMINI.md  gemini-extension.json      platform adapters
-README.ar.md                                      Arabic summary
-LICENSE  NOTICE  THIRD_PARTY_NOTICES.md  TRADEMARKS.md  SECURITY.md  CONTRIBUTING.md
+README.ar.md                                      Arabic (full translation)
+LICENSE  NOTICE  THIRD_PARTY_NOTICES.md  TRADEMARKS.md  SECURITY.md  CONTRIBUTING.md  VERSIONING.md  CHANGELOG.md
 ```
 
 ## Development
@@ -181,10 +189,43 @@ python3 tools/make_screenshots.py     # regenerate docs/screenshots (needs Playw
 - **Third parties keep their rights.** Font Awesome Free (CC BY 4.0), fonts (OFL 1.1), Material Design Icons (Apache-2.0) and others are credited in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Home Assistant documentation (CC BY-NC-SA 4.0) is **not** copied; facts are restated in original wording. No Home Assistant logo is used. n8n is optional and not redistributed.
 - **Not legal advice.** Camera/privacy notes are engineering guidance; check the laws that apply where you deploy before installing cameras.
 
+## Third-party components
+
+Everything below belongs to its owners and keeps its own licence; full text and usage in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+| Component | Licence | Use |
+|---|---|---|
+| [Font Awesome Free](https://fontawesome.com/license/free) | CC BY 4.0 (icons) | 55 solid icons as SVG paths, preview only |
+| [ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | MIT | Bundled unmodified in `vendor/`, with its LICENSE |
+| Inter, Source Serif 4, JetBrains Mono | SIL OFL 1.1 | Preview typography (loaded from Google Fonts) |
+| Material Design Icons | Apache-2.0 | `mdi:` names only |
+| Home Assistant | Apache-2.0 (code) | Target platform, referenced only; documentation (CC BY-NC-SA) not copied |
+| PyYAML, pytest, Playwright | MIT / Apache-2.0 | Installed by the user, not redistributed |
+| shields.io, GitHub Actions, Docker `python:3.12-slim` | their terms | README badges, CI and the container image |
+
 ## Contributing & security
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) (DCO sign-off, original wording only) and [SECURITY.md](SECURITY.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md) (DCO sign-off, original wording only), [SECURITY.md](SECURITY.md) and [VERSIONING.md](VERSIONING.md) (SemVer, release steps).
 
 ---
 
-<div align="center"><sub>© 2026 DXBMARK LLC · Apache-2.0</sub></div>
+<div align="center">
+
+### Get in touch
+
+[![Visit Website](https://img.shields.io/badge/Visit%20Website-www.dxbmark.com-f97e1a?style=for-the-badge&logo=googlechrome&logoColor=white)](https://www.dxbmark.com)
+[![Contact Us](https://img.shields.io/badge/Contact%20Us-info%40dxbmark.com-0b1220?style=for-the-badge&logo=gmail&logoColor=f97e1a)](mailto:info@dxbmark.com)
+[![Follow on LinkedIn](https://img.shields.io/badge/Follow%20on-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/dxbmark)
+
+### Let's connect
+
+| | |
+|---|---|
+| **LinkedIn** | [linkedin.com/company/dxbmark](https://www.linkedin.com/company/dxbmark) |
+| **Email** | [info@dxbmark.com](mailto:info@dxbmark.com) |
+| **WhatsApp** | [+971 50 512 1583](https://wa.me/971505121583) |
+| **Website** | [www.dxbmark.com](https://www.dxbmark.com) |
+
+<sub>© 2026 DXBMARK LLC · Apache-2.0 · Dubai, UAE &nbsp;|&nbsp; ⭐ Star the repo if HA Studio helps your business</sub>
+
+</div>

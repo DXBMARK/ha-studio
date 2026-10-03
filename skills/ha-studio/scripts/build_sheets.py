@@ -17,7 +17,7 @@ def icon(name, icons, size=22):
 def components(tok, icons):
     v = ';'.join(f'{k}:{x}' for k, x in tok['cssVars'].items())
     res = check(tok)
-    sw = ''.join(f'<div class="sw" style="background:{tok["colors"][k]}"><b>{k}</b><span>{tok["colors"][k][:22]}</span></div>'
+    sw = ''.join(f'<div class="sw" style="background:{tok["colors"][k]}"><b>{k}</b><span>{tok["colors"][k]}</span></div>'
                  for k in ('acc', 'acct', 'ok', 'warn', 'bad', 't', 'm'))
     rows = ''.join(f'<tr><td>{r["pair"]}</td><td>{r["ratio"]}</td><td>≥ {r["need"]}</td><td class="{"ok" if r["ok"] else "bad"}">{"PASS" if r["ok"] else "FAIL"}</td></tr>' for r in res['rows'])
     tile = lambda ic, t, s, on: (f'<div class="tile {"on" if on else ""}"><span class="ico">{icon(ic, icons)}</span><div><b>{t}</b><small>{s}</small></div></div>')
@@ -25,9 +25,9 @@ def components(tok, icons):
 <style>*{{box-sizing:border-box}}body{{margin:0;font:14px Inter,system-ui,sans-serif;background:{tok["base"]}}}
 .root{{{v};width:1194px;padding:28px;background:{tok["background"]};color:var(--t);min-height:760px}}
 h1{{font:600 26px "Source Serif 4",Georgia,serif;margin:0 0 4px}}p{{color:var(--m);margin:0 0 18px}}
-.grid{{display:grid;grid-template-columns:1fr 1fr;gap:16px}}.card{{background:var(--card);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:var(--blur);padding:18px}}
+.grid{{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}}.card{{min-width:0;background:var(--card);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:var(--blur);padding:18px}}
 .card h2{{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--m);margin:0 0 12px}}
-.sws{{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}}.sw{{border-radius:12px;padding:10px;height:64px;display:flex;flex-direction:column;justify-content:flex-end;font-size:11px;border:1px solid var(--line);color:#000;mix-blend-mode:normal;text-shadow:0 0 2px #fff8}}
+.sws{{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}}.sw{{border-radius:12px;padding:10px;min-height:64px;display:flex;flex-direction:column;justify-content:flex-end;font-size:10px;word-break:break-all;border:1px solid var(--line);color:#000;mix-blend-mode:normal;text-shadow:0 0 2px #fff8}}
 .tile{{display:flex;gap:12px;align-items:center;padding:12px;border-radius:16px;background:var(--chip);border:1px solid var(--line);min-height:64px;margin-bottom:8px}}
 .tile.on{{background:var(--accsoft);border-color:var(--acc)}}.tile small{{display:block;color:var(--m)}}.ico{{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--chip);color:var(--acct)}}
 .btn{{border:0;border-radius:999px;padding:12px 20px;min-height:48px;font:600 14px Inter;background:var(--acc);color:var(--ona);margin-right:8px}}.btn.g{{background:var(--chip);color:var(--t);border:1px solid var(--line)}}
@@ -48,9 +48,9 @@ def icon_sheet(tok, icons):
     cells = ''.join(f'<div class=c>{icon(n, icons, 28)}<small>{n}</small></div>' for n in icons)
     lic = '<br>'.join(json.loads((ROOT / 'assets/icons/fa-subset.json').read_text())['_license'].values())
     return f'''<!doctype html><meta charset=utf-8><title>Icons</title><style>body{{margin:0;font:12px Inter,system-ui;background:{tok["base"]};color:{tok["colors"]["t"]}}}
-.w{{width:1194px;padding:28px;background:{tok["background"]}}}h1{{font:600 24px "Source Serif 4",Georgia,serif;margin:0 0 14px}}
-.g{{display:grid;grid-template-columns:repeat(10,1fr);gap:10px}}.c{{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px;border-radius:14px;background:{tok["colors"]["card"]};border:1px solid {tok["colors"]["border"]};color:{tok["colors"]["acct"]}}}
-small{{color:{tok["colors"]["m"]};font-size:11px}}p{{color:{tok["colors"]["m"]};font-size:11px;margin-top:14px}}</style>
+.w{{width:1194px;box-sizing:border-box;padding:28px;background:{tok["background"]}}}h1{{font:600 24px "Source Serif 4",Georgia,serif;margin:0 0 14px}}
+.g{{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:10px}}.c{{min-width:0;display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px;border-radius:14px;background:{tok["colors"]["card"]};border:1px solid {tok["colors"]["border"]};color:{tok["colors"]["acct"]}}}
+small{{color:{tok["colors"]["m"]};font-size:11px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}p{{color:{tok["colors"]["m"]};font-size:11px;margin-top:14px}}</style>
 <div class=w><h1>Icon set ({len(icons)} glyphs, preview only; dashboards use mdi: names)</h1><div class=g>{cells}</div><p>{lic}</p></div>'''
 
 def main():

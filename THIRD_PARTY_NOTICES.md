@@ -16,6 +16,10 @@ their own licences. Nothing here transfers or claims their rights.
 | ui-ux-pro-max (nextlevelbuilder/ui-ux-pro-max-skill, v2.13.0, commit 09170ee) | Design knowledge base (search scripts + CSV data) | MIT, Copyright (c) 2024 Next Level Builder | Bundled unmodified in `skills/ha-studio/vendor/ui-ux-pro-max/` with its LICENSE (large Google-Fonts and Phosphor catalogues omitted). We rely on upstream's MIT statement for its data. |
 | Playwright, PyYAML, pytest | Development and tests | Apache-2.0 / MIT | Installed from PyPI by the user; not redistributed. |
 | n8n | Optional integration discussed in docs | Sustainable Use License | No n8n code or workflows are distributed. Users install n8n themselves under its licence. |
+| shields.io | README badges (images loaded from img.shields.io at view time) | Service terms | Not redistributed. |
+| GitHub Actions, CodeQL, Dependabot | CI, security scan, updates | GitHub terms | Workflows only. |
+| Docker base image `python:3.12-slim` and Docker actions | Container image (ghcr.io) | Their respective licences | Pulled at build time; not committed. |
+| jlnbln/My-HA-Dashboard and community dashboards | Inspiration for room-based and per-user layouts | n/a | Studied for ideas only; no code, text or images copied. |
 
 The Home Assistant name, logo and trademarks belong to their owners (Open Home Foundation). This repository does not
 use the logo and uses the name only descriptively ("compatible with Home Assistant").

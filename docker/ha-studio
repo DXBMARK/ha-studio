@@ -1,0 +1,9 @@
+#!/bin/sh
+# usage: ha-studio <script> [args]   e.g. ha-studio generate_lovelace inventory.json --profile office
+S=${HA_STUDIO_SCRIPTS:-/opt/ha-studio/scripts}
+if [ -z "$1" ] || [ "$1" = "--help" ]; then
+  echo "usage: ha-studio <script> [args]"; echo "scripts:"; ls "$S" | sed -n 's/\.py$//p; /^_/d' | grep -v '^_' | sed 's/^/  /'; exit 0
+fi
+name="${1%.py}"; shift
+[ -f "$S/$name.py" ] || { echo "unknown script: $name" >&2; exit 2; }
+exec python3 "$S/$name.py" "$@"

@@ -1,0 +1,49 @@
+name: release
+on:
+  push: {tags: ["v*.*.*"]}
+permissions: {contents: read}
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions: {contents: write, packages: write}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install pytest PyYAML
+      - name: Tag must match VERSION files
+        run: |
+          python3 - <<'PY'
+          import json, os, re
+          tag = os.environ["GITHUB_REF_NAME"].lstrip("v")
+          v = json.load(open(".claude-plugin/plugin.json"))["version"]
+          assert tag == v, f"tag {tag} != plugin.json {v}"
+          PY
+      - run: python3 skills/ha-studio/scripts/lint_skill.py
+      - run: pytest -q
+      - name: Build release files
+        run: python3 tools/build_release.py --out dist
+      - name: Release notes from CHANGELOG
+        run: python3 tools/release_notes.py "${GITHUB_REF_NAME#v}" > notes.md
+      - name: Create GitHub Release
+        env: {GH_TOKEN: "${{ github.token }}"}
+        run: |
+          gh release create "$GITHUB_REF_NAME" --title "HA Studio $GITHUB_REF_NAME" --notes-file notes.md \
+            dist/ha-studio-*.zip dist/chatgpt-pack-*.zip dist/gem-instructions.md dist/SHA256SUMS
+      - uses: docker/login-action@v3
+        with: {registry: ghcr.io, username: "${{ github.actor }}", password: "${{ secrets.GITHUB_TOKEN }}"}
+      - uses: docker/metadata-action@v5
+        id: meta
+        with:
+          images: ghcr.io/dxbmark/ha-studio
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value=latest
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
