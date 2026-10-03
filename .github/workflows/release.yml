@@ -30,7 +30,7 @@ jobs:
         run: |
           gh release create "$GITHUB_REF_NAME" --title "HA Studio $GITHUB_REF_NAME" --notes-file notes.md \
             dist/ha-studio-*.zip dist/chatgpt-pack-*.zip dist/gem-instructions.md dist/SHA256SUMS
-      - uses: docker/login-action@v3
+      - uses: docker/login-action@v4
         with: {registry: ghcr.io, username: "${{ github.actor }}", password: "${{ secrets.GITHUB_TOKEN }}"}
       - uses: docker/metadata-action@v5
         id: meta
