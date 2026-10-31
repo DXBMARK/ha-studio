@@ -1,6 +1,6 @@
 # HA Studio command-line tools as a container image (read-only tools; no Home Assistant access unless you pass HA_URL/HA_TOKEN).
 # (c) 2026 DXBMARK LLC - Apache-2.0
-FROM python:3.12-slim
+FROM python:3.15-slim
 LABEL org.opencontainers.image.title="ha-studio" \
       org.opencontainers.image.description="Plan, design and generate business-grade dashboards compatible with Home Assistant" \
       org.opencontainers.image.source="https://github.com/DXBMARK/ha-studio" \
